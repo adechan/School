@@ -1,0 +1,8 @@
+global real cat = 1;
+
+function integer test(integer sum)
+{
+	integer x = 2;
+	if (x == 2)
+		sum = 3;
+}

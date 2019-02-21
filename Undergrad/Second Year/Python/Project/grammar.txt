@@ -1,0 +1,44 @@
+
+
+program -> int main() { block;} .
+block -> { statement_list } .
+
+statement_list -> statement statement_list1 .
+statement_list1 -> statement statement_list1 .
+statement_list1 -> .
+
+statement -> control_statement .
+statement -> expression_statement .
+statement -> return_statement block .
+statement -> assignment_expression .
+
+return_statement -> return rvalue ; .
+
+control_statement -> if_statement .
+control_statement -> while_statement .
+
+expression_statement -> variable_declaration .
+
+if_statement -> if ( conditional_expression ) statement else statement .
+while_statement -> while ( conditional_expression ) statement .
+
+conditional_expression -> constant conditional_operator constant .
+
+variable_declaration -> type assignment_decl1 assignment_decl2 ; .
+assignment_decl1 -> identifier assignment1 .
+assignment1 -> assignment_operator constant .
+assignment1 -> .
+assignment_decl2 -> , identifier assignment2 .
+assignment_decl2 -> .
+assignment2 -> assignment_operator constant assignment_decl2 .
+assignment2 -> .
+
+assignment_expression -> lvalue = rvalue ; .
+lvalue -> id .
+lvalue -> constant ++ .
+lvalue -> ++constant .
+rvalue -> constant rvalue2 .
+rvalue2 -> .
+rvalue2 -> + constant .
+
+
