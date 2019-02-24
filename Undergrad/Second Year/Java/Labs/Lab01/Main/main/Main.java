@@ -29,16 +29,23 @@ public class Main {
 		
 		String typeOfGraph = args[1];
 		
+		// create matrix
 		int[][] matrix = AdjacencyMatrix.CreateMatrix(n, typeOfGraph);
 		
+		// display matrix
 		DisplayMatrix.Display(n, matrix);	
+		System.out.println();
 		
+		// edges
 		int m = Edges.NumberOfEdges(n, matrix);
 		System.out.println("Number of edges is " + m);
 		
+		// maximum and minimum degree
 		Degree.maximumDegree(n, matrix);
 		Degree.minimumDegree(n, matrix);
 		
-		System.out.println(SumOfDegrees.IsSumEqualsValue(n, matrix, m));
+		// verify if sum of degrees = 2 * m
+		if (SumOfDegrees.IsSumEqualsValue(n, matrix, m) == true)
+			System.out.println("Sum of degrees is equal to 2 * m");
 	}
 }

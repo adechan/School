@@ -1,26 +1,26 @@
 package sumofdegrees;
 import edges.Edges;
 
-// TO DO
-// sum of the degrees equals the value 2 * m
-// sum EACH row of the matrix 
 public class SumOfDegrees {
 
 	public static boolean IsSumEqualsValue(int n, int[][] matrix, int value)
 	{
 		int sumRow[] = new int[n];
-		int sum = 0;
+		int totalSum = 0;
 		
+		// i = row ; j = column
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)
-			{
-				sumRow[i] += matrix[i][j];	
-				sum += sumRow[i];
-		}
+			{	
+				sumRow[i] += matrix[i][j];
+			}
 			
-		System.out.println("Suma" + sum);
+			totalSum += sumRow[i];
 		}
+		
+		if (totalSum != 2 * Edges.NumberOfEdges(n, matrix))
+			return false;
 		return true;
 	}
 }

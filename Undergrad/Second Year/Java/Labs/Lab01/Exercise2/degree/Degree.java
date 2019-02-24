@@ -8,7 +8,7 @@ public class Degree {
 	{
 		int sumRow[] = new int[n];
 		int maximum = 0;
-		String symbol = "\u0394";
+		char symbol = '\u0394';
 		
 		// i = row ; j = column
 		for (int i = 0; i < n; i++)
@@ -23,7 +23,8 @@ public class Degree {
 			}
 		}
 		// you CAN NOT use System.out with Unicode strings
-		// UNICODE uses "UTF-8"
+		// UNICODE uses "UTF-16"
+
 		System.out.println("Maximum degree is " + symbol + "(G)= " + maximum);
 	}
 	
@@ -31,7 +32,7 @@ public class Degree {
 	{
 		int sumRow[] = new int[n];
 		int minimum = 0;
-		String symbol = "\u03B4";
+		char symbol = '\u03B4';
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)
