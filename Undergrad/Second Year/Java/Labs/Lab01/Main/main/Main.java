@@ -19,6 +19,7 @@ public class Main {
 		System.out.println();
 		
 		// exercise 2
+		long startTime = System.currentTimeMillis();
 		int n = 0;
 		if (Integer.parseInt(args[0]) % 2 != 0)
 		{
@@ -47,5 +48,8 @@ public class Main {
 		// verify if sum of degrees = 2 * m
 		if (SumOfDegrees.IsSumEqualsValue(n, matrix, m) == true)
 			System.out.println("Sum of degrees is equal to 2 * m");
+		
+		System.out.println(System.currentTimeMillis() - startTime);	
+	
 	}
 }

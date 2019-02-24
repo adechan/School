@@ -1,5 +1,7 @@
 package adjancencymatrix;
 
+import java.util.Random;
+
 public class AdjacencyMatrix {
 	
 	// complete graph
@@ -56,9 +58,24 @@ public class AdjacencyMatrix {
 			}
 		}
 		
+		// randomly fills the matrix with 1 and 0
 		else if (typeOfGraph.equals("random"))
 		{
-			
+			System.out.println("Random Graph:");
+			Random r = new Random();
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < n; j++)
+				{
+					if (i != j)
+					{
+						matrix[i][j] = r.nextInt(2);
+						matrix[j][i] = matrix[i][j];
+					}
+					else 
+						matrix[i][j] = 0;
+				}
+			}
 		}
 		
 		return matrix;
