@@ -8,6 +8,7 @@ public class Student {
 	private int yearOfStudy;
 	private ArrayList<Project> preferences; 
 	
+	// constructor
 	public Student(String name, int yearOfStudy)
 	{
 		this.name = name;

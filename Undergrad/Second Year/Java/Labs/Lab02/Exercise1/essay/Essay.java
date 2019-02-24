@@ -7,6 +7,7 @@ public class Essay extends Project {
 
 	private Topic topic;
 
+	// constructor
 	public Essay(String name, LocalDate deadline, Topic topic)
 	{
 		this.name = name;

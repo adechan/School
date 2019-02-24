@@ -8,6 +8,7 @@ public class Application extends Project {
 
 	private Language language;
 	
+	// constructor
 	public Application(String name, LocalDate deadline, Language language)
 	{
 		this.name = name;
