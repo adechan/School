@@ -3,13 +3,11 @@ import java.io.*;
 import filtration.Filtration;
 import encryption.Encryption;
 import encryption.Key;
+import decryption.Decryption;
+import decryption.FrequencyLetter;
 
 public class Main {
 	
-	public static void rest()
-	{		
-	}
-
 	public static void main(String[] args)
 	{
 
@@ -34,9 +32,10 @@ public class Main {
 			while ((line = bufferedReader.readLine()) != null)
 			{
 				// we have to remove everything BUT NOT A-Z
-				// and make a-z A-Z
+				// and make a-z in A-Z
 				String filtered = Filtration.getFiltratedString(line);
 				bufferedWriter.write(Encryption.encryptPlaintext(filtered, key));
+			    // FrequencyLetter.countFrequencyLetter((Encryption.encryptPlaintext(filtered, key)));
 			}
 
 			bufferedWriter.close();
@@ -48,5 +47,6 @@ public class Main {
 		{
 			e.printStackTrace();
 		}
+		
 	}
 }
