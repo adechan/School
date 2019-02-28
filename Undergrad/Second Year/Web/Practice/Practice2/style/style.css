@@ -1,0 +1,46 @@
+html
+{
+  background-color: lightblue;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+}
+
+#chess
+{
+  border: 1px solid #111111;
+  border-collapse: collapse;
+  text-align: center;
+  margin: auto;
+}
+
+#black
+{
+  background-color: #777777;
+  width: 60px;
+  height: 60px;
+  font-size: 38px;
+}
+
+#white
+{
+  background-color: #F7F7F7;
+  width: 60px;
+  height: 60px;
+  font-size: 38px;
+}
+
+#button_forward
+{
+  position:absolute;
+  background-color: pink;
+  top: 300px;
+  right: 400px;
+}
+
+#button_backward
+{
+  position:absolute;
+  background-color: pink;
+  top: 300px;
+  left: 400px;
+}
