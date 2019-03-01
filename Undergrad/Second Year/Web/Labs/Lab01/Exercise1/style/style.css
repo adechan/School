@@ -28,3 +28,45 @@ html
   height: 60px;
   font-size: 38px;
 }
+
+#pink
+{
+  background-color: pink;
+  width: 60px;
+  height: 60px;
+  font-size: 38px;
+}
+
+#darkpink
+{
+  background-color: #95698D;
+  width: 60px;
+  height: 60px;
+  font-size: 38px;
+}
+
+#button_forward
+{
+  position:absolute;
+  background-color: pink;
+  top: 300px;
+  right: 400px;
+}
+
+#button_forward:hover
+{
+  background-color: #95698D;
+}
+
+#button_backward
+{
+  position:absolute;
+  background-color: pink;
+  top: 300px;
+  left: 400px;
+}
+
+#button_backward:hover
+{
+  background-color: #95698D;
+}
