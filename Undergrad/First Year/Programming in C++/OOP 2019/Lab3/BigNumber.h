@@ -3,8 +3,8 @@ class BigNumber {
 
 private:
 
-	char number[256];
-	int charactersCount;
+	char bytes[256];
+	int usedBytesCount;
 
 public:
 
