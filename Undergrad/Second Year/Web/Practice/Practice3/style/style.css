@@ -1,0 +1,59 @@
+#canvas
+{
+  border:1px solid #d3d3d3;
+  background-color: #f1f1f1;
+}
+
+#square
+{
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background-color: red;
+  top: 200px;
+}
+
+#bar_top
+{
+  position: absolute;
+  width: 20px;
+  height: 150px;
+  background-color: green;
+  top: 0px;
+}
+
+#button_up
+{
+  position: absolute;
+  width: 55px;
+  height: 20px;
+  top: 520px;
+  left: 300px;
+}
+
+#button_left
+{
+  position: absolute;
+  width: 55px;
+  height: 20px;
+  top: 550px;
+  left:239px;
+}
+
+#button_right
+{
+  position: absolute;
+  width: 55px;
+  height: 20px;
+  top: 550px;
+  left: 360px;
+}
+
+#button_down
+{
+  position: absolute;
+  width: 55px;
+  height: 20px;
+  top: 580px;
+  left: 300px;
+}
