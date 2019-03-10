@@ -40,6 +40,8 @@ public class Catalog implements Serializable {
 			System.out.println(graph);
 	}
 	
+	// opens the image (or the definition) file using the 
+	// native operating system application (see the Desktop class);
 	public void open(String name) throws GraphNotFound, IOException
 	{
 		Graph found = null;
@@ -57,16 +59,8 @@ public class Catalog implements Serializable {
 		d.open(image);
 	}
 	
-	/*
-	 serialization : Converting an object to bytes 
-	 _ useful when we want to Persist the Object.
-	  When we want the object to exist beyond the 
-	  lifetime of the JVM.
-	 */
-	
-	// Serializable: mark interface (has no data and no methods)
-	// used to mark java classes so that objects of these
-	// classes may get certain capability
+	// saves the catalog to an external file (either as 
+	// text or binary using object serialization)
 	public void save(String filename) throws IOException
 	{
 		CatalogIO serializer = new CatalogIO(this.directory + "/" + filename);
@@ -74,6 +68,7 @@ public class Catalog implements Serializable {
 		serializer.serialize(this);
 	}
 	
+	// loads the catalog from an external file
 	public void load(String filename) throws IOException, InvalidCatalogFormat
 	{ 
 		CatalogIO serializer = new CatalogIO(this.directory + "/" + filename);

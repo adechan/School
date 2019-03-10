@@ -15,6 +15,16 @@ public class CatalogIO {
 		this.filename = filename;
 	}
 	
+	/*
+	 serialization : Converting an object to bytes 
+	 _ useful when we want to Persist the Object.
+	  When we want the object to exist beyond the 
+	  lifetime of the JVM.
+	 */
+	
+	// Serializable: mark interface (has no data and no methods)
+	// used to mark java classes so that objects of these
+	// classes may get certain capability
 	public void serialize(Catalog output) throws IOException
 	{
         // Reading the object from a file 
