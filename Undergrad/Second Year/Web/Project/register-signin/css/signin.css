@@ -1,0 +1,95 @@
+html
+{
+  background-color: #222629;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.signin-box
+{
+  background-color: /*#61892F*/ #6B6E70;
+  width: 450px;
+  height: 450px;
+  top: 150px;
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  margin-top: -10px;
+  /*float: center;*/
+}
+
+
+.username-class
+{
+  position: absolute;
+  margin-left: 100px;
+  margin-top: 100px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+
+}
+
+.password-class
+{
+  position: absolute;
+  margin-left: 100px;
+  margin-top: 180px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+}
+
+
+#no-account
+{
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  text-shadow:0px 1px 0px #2f6627;
+  color: white;
+  margin: auto;
+  margin-top: 508px;
+  margin-left: 140px;
+  /*float: center;*/
+  position: relative;
+}
+
+input[type=submit]
+ {
+  background-color: #A1EE2F;
+	border-radius:5px;
+	border:1px solid black;
+	display:inline-block;
+	cursor: default;
+	color: #222629;
+
+  font-family: 'Noto Sans', sans-serif;
+	font-size:15px;
+	padding:10px 16px;
+  margin: auto;
+  margin-top: 318px;
+  margin-left: 180px;
+  /*float: center;*/
+  position: relative;
+}
+
+input[type=text]
+ {
+  width: 250px;
+  height: 29px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=password]
+ {
+  width: 250px;
+  height: 29px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
