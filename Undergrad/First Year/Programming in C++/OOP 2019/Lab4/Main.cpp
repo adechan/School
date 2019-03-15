@@ -1,8 +1,10 @@
 #include <iostream>
 #include "List.h"
+#include "BinaryTree.h"
 
 int main()
 {
+	std::cout << "Test LinkedList" << std::endl;
 	List myList = List();
 	myList.Add(3);
 	myList.Add(1);
@@ -50,7 +52,7 @@ int main()
 	 myList.Add(8);
 	 myList.Add(4);
 
-	 std::cout << "Sort list1: " << std::endl;
+	 std::cout << "Sort list2: " << std::endl;
 	 int* sortedList2 = myList.GetSortedArray();
 	 for (int i = 0; i < myList.GetCount() - 1; i++)
 	 {
@@ -59,9 +61,21 @@ int main()
 	 std::cout << std::endl;
 
 	 std::cout << "Count:" << myList.GetCount() << std::endl;
+	 std::cout << std::endl;
 
 	delete[] sortedList;
 	delete[] sortedList2;
+
+	std::cout << "Test BinaryTree" << std::endl;
+	BinaryTree myTree = BinaryTree();
+
+
+	myTree.Add(2);
+	myTree.Add(3);
+
+	myTree.printTree();
+
+
 	std::cin.get();
 	return 0;
 }
