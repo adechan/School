@@ -2,7 +2,7 @@ package des;
 /**
  * Class describing the DES boxes.
  * Tables are based on bit permutations where
- * the index of the array corresponds to the ouput bit, 
+ * the index of the array corresponds to the output bit, 
  * and the value indicates which bit of the input
  * should be used.
  * 
@@ -11,10 +11,7 @@ package des;
  */
 public class DesBoxes {
 
-	/*
- 	 * Initial Permutation (the message is permuted by this permutation at 
- 	 * the begining of the algorithm.
-	 */
+	// Initial Permutation
 	public static final byte[] IP = 
 		{
 				58, 50, 42, 34, 26, 18, 10, 2,
@@ -27,10 +24,8 @@ public class DesBoxes {
 		        63, 55, 47, 39, 31, 23, 15, 7
 		};
 	
-	/*
-	 * Inverse Permutation (the final result is permuted by
-	 * this permutation to generate the final ciphertext)
-	 */
+	// Inverse Permutation: final result is permuted with this to generate
+	// cryptotext OR plaintext
 	public static final byte[] InverseP =
 		{
 			     40, 8, 48, 16, 56, 24, 64, 32,
@@ -45,11 +40,7 @@ public class DesBoxes {
 	
 	// Permutations related to Feistel function:
 	
-	/*
-	 * Expansion Permutation (f function begins by applying 
-	 * this permutation to its 32bit bistring to create an 
-	 * "expanded" 48bit value
-	 */
+	// Extension Permutation: apply to 32bit string to create 48bit string
 	public static final byte[] E =
 		{
 			        32, 1,  2,  3,  4,  5,
@@ -62,11 +53,7 @@ public class DesBoxes {
 			        28, 29, 30, 31, 32, 1		
 		};
 	
-	/*
-	 * Subsitution Boxes (perform bit subsitutions according to this table;
-	 * a 48bit value is split into 6bit sections, and each section is permuted into
-	 * a different 6bit value according to these eight tables 
-	 */
+	// Substitution Boxes: a 48bit value is split into 6bit sections
 	 public static final byte[][] S = { 
 		{
 	        14, 4,  13, 1,  2,  15, 11, 8,  3,  10, 6,  12, 5,  9,  0,  7,
@@ -126,12 +113,9 @@ public class DesBoxes {
 	    
 	 };
 	 
-    
-	 /*
-	  * P Permutation (f functions applies this 32bit permutation to the 
-	  * result of the S-box subsitution, in order to spread the output
-	  * bits across 6 different S-boxes in the next round)
-	  */
+	 // P Permutation: bitstring of length 32 is permuted according to this
+	 // in order to spread the outputbits across 6different S-boxes 
+	 // in the next round
 	 public static final byte[] P = {
         16, 7,  20, 21,
         29, 12, 28, 17,
@@ -144,11 +128,9 @@ public class DesBoxes {
     };
 
 	 // Permutations related to subkey generation:
-	 
-	/*
-	 * PC1 Permutation (64bit key is permuted according to this table
-	 * into a 56bit key) 
-	 */
+
+	 // PC1 Permutation: 64bit key is permuted according to this into
+	 // a 56bit key
 	 public static final byte[] PC1 = {
             57, 49, 41, 33, 25, 17, 9,
             1,  58, 50, 42, 34, 26, 18,
@@ -160,11 +142,7 @@ public class DesBoxes {
             21, 13, 5,  28, 20, 12, 4
         };
     
-	 /*
-	  * PC2 Permutation (the subkey generation process applies 
-	  * this permutation to transform its running 56bit value 
-	  * into the final set of 16 48bit subkeys) 
-	  */
+	 // PC2 Permutation: to transform the key into 16 x 48bit subkeys
 	 public static final byte[] PC2 = {
             14, 17, 11, 24, 1,  5,
             3,  28, 15, 6,  21, 10,
@@ -176,12 +154,8 @@ public class DesBoxes {
             46, 42, 50, 36, 29, 32
         };
     
-	 /*
-	  * Subkey Rotations (part of the subkey generation process 
-	  * involves rotating certain bit-sections of the key
-	  * by either one or two bits to the left)
-	  */
-	 
+	 // Subkey rotations:
+	 // Rotating certain bitsections of the key by 1 or 2 bits to the left
 	 // shift one position i = 1, 2, 9, 16
 	 // shift two position i = 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15
 	 public static final byte[] shiftPositions = 

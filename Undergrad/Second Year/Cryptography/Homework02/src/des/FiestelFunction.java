@@ -1,23 +1,13 @@
 package des;
 import main.Utility;
-
 /**
- * A class describing the Fiestel function. 
- * f (A, J) A = 32 bits, J = 48 bits
- * 
- * -> The first argument A is expanded to a bistring of length 48 according to E table;
- * E(A) consists of the 32 bits from A, permuted in a certain way, with 16 of the bits appearing twice
- * 
- * -> Compute E(A) XOR J and write the result as the concatenation of 8 x 6bit strings B
- * 
- * -> Using 8 S-Boxes, each Si is a fixed 4 x 16 array whose entries come from the integeres 0-15;
- * Given a bistring of length 6 Bj, we compute Sj Bj as :
- * ---> the 2 bits b1b6 determine the binary representation of a column C of the 4 bits b2b3b4b5
- * ---> Sj(Bj) is defined to be the entry Sj(r, c) written in binary as a bistring of length 4; j <= 8
- * 
- * -> The bistring C of length 32 is permuted according to a permutation P
- * 
- * P(C) is defined to be f(A, J)
+ * A class describing the Fiestel Function.
+ * Given one argument of length 32 and another one of length 48, permuting 
+ * we get a bistring of length 32, which will be used to compute XOR with the argument
+ * of 48 length, to get 8 x 6bitstrings. 
+ * It will use the 8 S-boxes so a 48bit value is split into 6-bit sections, and each 
+ * section is permuted into a different 6-bit value. 
+ * 8 x bistring resulted of length 32 will be permuted according to P Permutation.
  * @author Andreea Rindasu
  *
  */
@@ -25,92 +15,85 @@ public class FiestelFunction {
 	
 	/**
 	 * 
-	 * @param argument : bistring of length 32
-	 * @param roundKey : bistring of length 48
-	 * @returns the bistring C of length 32 permuted according to P : P(C)
+	 * @param argument32Bits : bistring of length 32
+	 * @param argument48Bits : bistring of length 48
+	 * @returns the bistring C of length 32 permuted according to P
 	 */
-	public static int[] fFunction(int[] argument, int[] roundKey) 
+	public static int[] fFunction(int[] argument32Bits, int[] argument48Bits) 
 	{
-		// The 32 bits of the argument array are expanded using E table.
+		// expandedArgument: stores the bits of first argument permuted with E
 		int expandedArgument[] = new int[48];
 		
-		// E(argument) consists of the 32 bits from argument permuted with 16 of the bits appearing twice
+		// expandedArgument consists of 48bits from first argument, 16 appearing twice
 		for(int i = 0; i < 48; i++)
 		{
-			expandedArgument[i] = argument[DesBoxes.E[i] - 1];
+			expandedArgument[i] = argument32Bits[DesBoxes.E[i] - 1];
 		}
 		
-		// Compute expanded argument XOR generated round key as concatenation of 8 x 6bit strings
-		int temp[] = Utility.xor(expandedArgument, roundKey);	
+		// compute expanded argument XOR and argument48Bits as a concatenation of 6x 8bitstrings
+		int computeResult[] = Utility.xorFunction(expandedArgument, argument48Bits);	
 
-		 // The S boxes are applied to this XOR result and this is the output of the Fiestel function 
-		int output[] = sBoxes(temp);
-		return output;
+		 // The S boxes are applied to result and, the final result is permuted according to P permutation
+		int resultFiestel[] = sBoxes(computeResult);
+		return resultFiestel;
 	}
 	
 	/**
-	 * Given a bistring of length 6, Bj we compute SjBj:
-	 * The 2 bits b1b6 determine the binary representation of a column c of the four bits b2b3b4b5
-	 * Sj(Bj) is defined to be the entry Sj(r,c) written in binary as a bistring of length 4
-	 * Cj = Sj(Bj)
-	 * @param bits
-	 * @return the bistring C of length 32 is permuted according to permutation P
+	 * 
+	 * @param bitstring
+	 * @return the permutation of final 8 x bistring of length 32 according to P Permutation 
 	 */
-	public static int[] sBoxes(int[] bits)
+	public static int[] sBoxes(int[] bitstring)
 	{
-		int output[] = new int[32];
+		// the result is 32 bits
+		int result[] = new int[32];
 		
-		// input will be 32 bits and we will take 4 bits of input each iteration so loop 32/4 = 8 bits 
+		// we will take each iteration 4 bits: 32/4 = 8
 		for(int i = 0; i < 8; i++) 
 		{
-			// Needs a row and a column which is found from the input bits 
+			// Find row and column to get the entry of a 4length string written in binary
 
-			// for row: b0b5
-			int row[] = new int [2];	
-			row[0] = bits[6 * i];
-			row[1] = bits[(6 * i) + 5];
+			// Row: b0 b5
+			int rowBox[] = new int [2];	
+			rowBox[0] = bitstring[6 * i];
+			rowBox[1] = bitstring[(6 * i) + 5];	
+			String concatenationRowBox = rowBox[0] + "" + rowBox[1];
 			
-			String sRow = row[0] + "" + row[1];
-			
-			// for column: b1b2b3b4
-			int column[] = new int[4];
-			column[0] = bits[(6 * i) + 1];
-			column[1] = bits[(6 * i) + 2];
-			column[2] = bits[(6 * i) + 3];
-			column[3] = bits[(6 * i) + 4];
-			
-			String sColumn = column[0] + "" + column[1] + "" + column[2] + "" + column[3];
+			// Column: b1 b2 b3 b4
+			int columnBox[] = new int[4];
+			columnBox[0] = bitstring[(6 * i) + 1];
+			columnBox[1] = bitstring[(6 * i) + 2];
+			columnBox[2] = bitstring[(6 * i) + 3];
+			columnBox[3] = bitstring[(6 * i) + 4];
+			String concatenationColumnBox = columnBox[0] + "" + columnBox[1] + "" + columnBox[2] + "" + columnBox[3];
 
-			// Convert binary to decimal value to be given into the array as input 
-			int inputRow = Integer.parseInt(sRow, 2);
-			int inputColumn = Integer.parseInt(sColumn, 2);
+			// Convert binary to decimal value
+			int valueRow = Integer.parseInt(concatenationRowBox, 2);
+			int valueColumn = Integer.parseInt(concatenationColumnBox, 2);
 			
-			// 16 array
-			int x = DesBoxes.S[i][(inputRow * 16) + inputColumn];
+			// decimal value
+			int valueSBox = DesBoxes.S[i][(valueRow * 16) + valueColumn];
+			String binaryValueSBox = Integer.toBinaryString(valueSBox);
 			
-			// We get the decimal value of the SBox, but we have to convert it to binary 
-			String s = Integer.toBinaryString(x);
-			
-			// Add '0' in front of the binary number 
-			// 5: 111 but we need 0111
-			while(s.length() < 4) 
+			// Add '0' in front of the binary number (5: 111 -> 0111)
+			while(binaryValueSBox.length() < 4) 
 			{
-				s = "0" + s;
+				binaryValueSBox = "0" + binaryValueSBox;
 			}
 			
-			// The binary bits are added to the output
+			// Add to the result the binary bits
 			for(int j = 0; j < 4; j++) 
 			{
-				output[(i * 4) + j] = Integer.parseInt(s.charAt(j) + "");
+				result[(i * 4) + j] = Integer.parseInt(binaryValueSBox.charAt(j) + "");
 			}
 		}
 
-		// Use the P permutation to the output to get the final result of one SBox round
+		// Use P Permutation to find finalResult of length 32
 		int finalResult[] = new int[32];
 		
 		for(int i = 0; i < 32; i++)
 		{
-			finalResult[i] = output[DesBoxes.P[i] - 1];
+			finalResult[i] = result[DesBoxes.P[i] - 1];
 		}
 		
 		return finalResult;
