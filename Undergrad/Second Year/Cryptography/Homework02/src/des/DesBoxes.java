@@ -28,10 +28,10 @@ public class DesBoxes {
 		};
 	
 	/*
-	 * Final Permutation [Inverse Permutation] (the final result is permuted by
+	 * Inverse Permutation (the final result is permuted by
 	 * this permutation to generate the final ciphertext)
 	 */
-	public static final byte[] FP =
+	public static final byte[] InverseP =
 		{
 			     40, 8, 48, 16, 56, 24, 64, 32,
 			     39, 7, 47, 15, 55, 23, 63, 31,
@@ -178,7 +178,7 @@ public class DesBoxes {
     
 	 /*
 	  * Subkey Rotations (part of the subkey generation process 
-	  * involves rotating certain bit-sections of the keystuff
+	  * involves rotating certain bit-sections of the key
 	  * by either one or two bits to the left)
 	  */
 	 

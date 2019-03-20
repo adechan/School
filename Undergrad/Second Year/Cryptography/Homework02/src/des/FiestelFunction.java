@@ -72,14 +72,14 @@ public class FiestelFunction {
 			
 			String sRow = row[0] + "" + row[1];
 			
-			// for column: b2b3b4b5
+			// for column: b1b2b3b4
 			int column[] = new int[4];
 			column[0] = bits[(6 * i) + 1];
 			column[1] = bits[(6 * i) + 2];
 			column[2] = bits[(6 * i) + 3];
 			column[3] = bits[(6 * i) + 4];
 			
-			String sColumn = column[0] +""+ column[1] +""+ column[2] +""+ column[3];
+			String sColumn = column[0] + "" + column[1] + "" + column[2] + "" + column[3];
 
 			// Convert binary to decimal value to be given into the array as input 
 			int inputRow = Integer.parseInt(sRow, 2);

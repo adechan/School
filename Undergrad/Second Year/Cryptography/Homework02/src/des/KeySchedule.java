@@ -34,7 +34,8 @@ public class KeySchedule {
 	 * 
 	 * @param bits
 	 * @param rotationValue
-	 * @return rotation to the left either one or 2 positions depending on the rotationValue
+	 * @return each bit is rotated to the left and the leftmost bit is stored at 
+	 * the rightmost bit. This is a left shift operation.
 	 */
 	public static int[] leftShift(int[] bits, int rotationValue) 
 	{
@@ -63,7 +64,7 @@ public class KeySchedule {
 	 * 
 	 * @param round
 	 * @param key
-	 * @return the subkey
+	 * @return generates round key
 	 */
 	public static int[] keySchedule(int round, int[] key)
 	{
@@ -79,7 +80,7 @@ public class KeySchedule {
 		C1 = leftShift(C, rotationTimes);
 		D1 = leftShift(D, rotationTimes);
 		
-		// CnDn stores combined C1D1 to use in Kn
+		// CnDn stores C1D1 to use in Kn
 		int CnDn[] = new int[56];
 		
 		// copies in C1 to 0, from CnDn from 0: 28 bits

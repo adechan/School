@@ -113,7 +113,7 @@ public class Des {
 					int newL[] = Utility.xor(L, newR);
 					L = R;
 					R = newL;
-					System.out.print("L = ");
+					System.out.print("\nL = ");
 					Utility.displayBits(L);
 					System.out.print("R = ");
 					Utility.displayBits(R);
@@ -128,13 +128,13 @@ public class Des {
 				
 				int finalOutput[] = new int[64];
 				/*
-				 * Applying Final Permutation to the previous output, we get the final output:
+				 * Applying Inverse Permutation to the previous output, we get the final output:
 				 * Encryption : final output is ciphertext
 				 * Decryption : final output is plaintext
 				 */
 				for(i = 0; i < 64; i++) 
 				{
-					finalOutput[i] = output[DesBoxes.FP[i] - 1];
+					finalOutput[i] = output[DesBoxes.InverseP[i] - 1];
 				}
 				
 				// Convert the final output to HEX string because it is int array of bits 
