@@ -8,6 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+/**
+ * A class describing a drawing panel (toolbar) which will be used for introducing
+ * parameters regarding the shapes that will be drawn. 
+ * @author Andreea Rindasu
+ *
+ */
 public class DrawingPanel extends JPanel {
 
 	/**
@@ -45,6 +51,7 @@ public class DrawingPanel extends JPanel {
     	}
     	catch(NumberFormatException e)
     	{
+    		// default brush size in case we dont say any number
     		return 5;
     	}
     }
@@ -57,6 +64,7 @@ public class DrawingPanel extends JPanel {
     	}
     	catch(NumberFormatException e)
     	{
+    		// default brush size in case we dont say any number
     		return 5;
     	}
     }

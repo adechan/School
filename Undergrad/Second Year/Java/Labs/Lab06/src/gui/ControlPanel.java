@@ -1,9 +1,6 @@
 package gui;
-
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,6 +11,7 @@ import javax.swing.filechooser.FileSystemView;
 /**
  * A control panel for managing items of the catalog (load, save, etc.). 
  * This panel will contains buttons for: load, save, etc.
+ * This will be placed at the bottom of the 
  * @author Andreea Rindasu
  *
  */

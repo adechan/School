@@ -5,11 +5,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * A class describing the main frame of the application.
+ * This will contain all of the components: Canvas in the center of the screen,
+ * Drawing Panel (Toolbar) at the top of the screen and a Control Panel at the 
+ * bottom of the screen. 
+ * @author Andreea Rindasu
+ *
+ */
 public class DrawingFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel pane;
 	
