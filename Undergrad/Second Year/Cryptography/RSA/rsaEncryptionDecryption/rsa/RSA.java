@@ -24,7 +24,7 @@ public class RSA {
 		Random random = new Random();
 		
 		// Generate 2 large random and distinct primes p and q on 1024 bits 
-		// isProbablePrime: returns true if this number is probably prime with specified bitLength
+		// probablePrime: returns true if this number is probably prime with specified bitLength
 		p = BigInteger.probablePrime(1024, random);
 		q = BigInteger.probablePrime(1024, random);
 		
@@ -41,43 +41,56 @@ public class RSA {
 			e.add(BigInteger.ONE);
 		
 		System.out.println("e is " + e);
+		
 		// Use the extended Euclidian algorithm to compute the unique integer d, 
 		// 1 < d < pfi such taht ed congruent 1 mod pfi
 		d = e.modInverse(phi);
+		
 		System.out.println("d is " + d);
 	}
 	
+	// Get random integer E.
 	public BigInteger getPublicKey()
 	{
 		return e;
 	}
 	
+	// Get private key D.
 	public BigInteger getPrivateKey()
 	{
 		return d;
 	}
 	
+	// Get computation P x Q. 
 	public BigInteger getModulus()
 	{
 		return n;
 	}
 	
+	// Get prime P.
 	public BigInteger getP()
 	{
 		return p;
 	}
 	
+	// Get prime Q.
 	public BigInteger getQ()
 	{
 		return q;
 	}
 	
+	// encryption: 
+	// public key (n, e)
+	// compute c = m ^ e mod n
 	public byte[] encryptText(byte[] message)
 	{
 		byte[] ciphertext = (new BigInteger(message)).modPow(e, n).toByteArray();
 		return ciphertext;
 	}
 	
+	// decryption:
+	// private key: d
+	// compute m = c ^ d mod n
 	public byte[] decryptText(byte[] ciphertext)
 	{
 		byte[] message = (new BigInteger(ciphertext)).modPow(d, n).toByteArray();
