@@ -7,9 +7,9 @@ public class Board {
 
 	private Graph graph;
 	
-	public Board(int size)
+	public Board(int Size)
 	{
-		this.graph = Graph.createCompleteGraph(size);
+		this.graph = Graph.createCompleteGraph(Size);
 	}
 	
 	public synchronized Edge extract()
