@@ -10,6 +10,7 @@ import rsa.RSA;
 
 public class Main {
 	
+	// Function for RSA
 	public static void calculateRSA(RSA rsa)
 	{
 		Stopwatch timer = new Stopwatch();
