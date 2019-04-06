@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import java.util.Random;
 
 /**
+ * This is RSA.
  * A class describing the key generation for RSA and also the encryption and decryption. 
  * Each entity creates an RSA public key and a corresponding private key. 
  * The public key is used to encryption and the private key is used for decryption.
