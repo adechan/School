@@ -1,0 +1,5 @@
+﻿  SimpleList.cpp
+  Main.cpp
+  Generating Code...
+c:\users\andreea rindasu\source\repos\recapitulare\lab3\lab3\simplelist.cpp(22): warning C4715: 'SimpleList::Add': not all control paths return a value
+  Lab3.vcxproj -> C:\Users\Andreea Rindasu\source\repos\RECAPITULARE\Lab3\Debug\Lab3.exe
