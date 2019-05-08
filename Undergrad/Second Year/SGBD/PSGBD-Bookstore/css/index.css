@@ -1,0 +1,158 @@
+body{
+  height:100%;
+  margin:0px;
+  background-color: #6B6E70;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.buttonsList2{
+  background-color: rgb(245,246,247);
+  overflow: auto;
+  display: flex;
+  text-align: center;
+}
+
+input[type = text]
+{
+  border-radius: 3px;
+  border: 1px solid grey;
+  width: 500px;
+  height: 35px;
+  max-width: 90%;
+  margin-top: 20px;
+}
+
+.buttonsList2center{
+  margin-left: 10%;
+  max-width: 20%;
+}
+
+.buttonsList2right{
+  margin-left: 27%;
+  max-width: 20%;
+}
+
+#h1{
+  font-size: 40px;
+  font-family: 'Sofia', cursive;
+}
+
+#h2{
+  padding-top: 0px;
+  position: relative;
+  margin-top: -10px;
+  font-size: 17px;
+  font-family: 'Baloo Bhai', cursive;
+  color: grey;
+}
+
+.buttonsList1 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  width: 100vw;
+  background-color: rgb(225,33,56);
+  overflow: auto;
+
+}
+
+.buttonsList1 a {
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: center ;
+  text-decoration: none;
+  color: white ;
+  float: left;
+  padding: 10px ;
+  width: 10%;
+  text-align: center;
+}
+.buttonsList1 input{
+  text-align: center ;
+  text-decoration: none;
+  color: white ;
+  float: left;
+  padding: 10px ;
+  width: 10%;
+  text-align: center;
+  background-color:#222629 ;
+  border:0;
+}
+
+.buttonsList1 a:hover {
+  width: 10%;
+  background-color: #B22828;
+}
+
+
+.buttonsList3 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  width: 100vw;
+  background-color:#B22828 ;
+  overflow: auto;
+}
+
+.buttonsList3 a {
+  margin-left: 50px;
+  margin-right: 50px;
+  text-align: center ;
+  text-decoration: none;
+  color: white ;
+  float: left;
+  padding: 10px ;
+  width: 10%;
+  text-align: center;
+}
+
+.buttonsList3 a:hover {
+  width: 10%;
+  background-color:rgb(225,33,56) ;
+}
+
+
+footer nav{
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  position:absolute;
+	bottom:0;
+  height:35px;
+  text-decoration: none;
+  bottom:0;
+  padding-top: 10px;
+  width:100%;
+  background-color: rgb(245,246,247);
+
+  border:0;
+  text-align: center;
+}
+
+nav a{
+  text-decoration: none;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+#priceId{
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+}
+
+#shopCardId{
+    text-decoration: none;
+    font-family: 'Roboto Slab', serif;
+    font-size: 15px;
+}
+
+@media (min-width: 256px) and (max-width: 800px) {
+  input[type = text]
+  {
+    width: 80%;
+  }
+
+  .buttonsList2right{
+    margin-left: 10%;
+  }
+}
