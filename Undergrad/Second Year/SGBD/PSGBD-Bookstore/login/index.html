@@ -29,7 +29,7 @@
     <div class = "buttonsList2">
 
       <div class = "buttonsList2left">
-		 		<input type="text" placeholder="Search product">
+		 		<input id="searchbar" type="text" placeholder="Search product">
       </div>
 
       <div class = "buttonsList2center">
@@ -57,7 +57,48 @@
     <div class = "mainDiv">
 			<row>
 				<col>
-			<img id ="picture" src="./css/bookstore.png">
+        <h3> Log into your account </h3>
+
+        <!-- MAIN BOX -->
+        <div class = "register-box">
+        <form class = "form" action = "#" method="post">
+
+        <!-- EMAIL -->
+        <div id = "emailId">
+        <input type = "text" id = "emailText" placeholder = "Type your email.." name ="email" required>
+        </div>
+
+        <!-- PASSWORD -->
+        <div id = "passwordId">
+        <input type = "password" id = "passwordText" placeholder = "Type your password.." name = "pass" required>
+        </div>
+
+        <!-- ADMINISTRATOR OR CLIENT -->
+        <div id = "administratorclientdId">
+				<select required>
+	  			<option value="adminstratorORclient"> Choose type of account </option>
+	  			<option value="administrator"> Administrator </option>
+	  			<option value="client"> Client </option>
+				</select>
+        </div>
+
+        <!-- REGISTER BUTTON -->
+        <div id = "registerButtonId">
+        	<input type = "submit" name="register-button" value = "Sign in" id = "submitText" >
+        </div>
+
+        </form>
+
+        <!-- ALREADY HAVE AN ACCOUNT text -->
+        <a href = "#" id = "alreadyAccountId"> Don't have an account yet? </a>
+
+        </div>
+
+        <br>
+        <br>
+				<br>
+				<br>
+
 				</col>
 			</row>
     </div>

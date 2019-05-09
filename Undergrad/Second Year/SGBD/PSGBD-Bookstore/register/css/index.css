@@ -13,7 +13,7 @@ body{
   text-align: center;
 }
 
-input[type = text]
+input[type = text], input[type = password]
 {
   border-radius: 3px;
   border: 1px solid grey;
@@ -45,6 +45,16 @@ input[type = text]
   font-size: 17px;
   font-family: 'Baloo Bhai', cursive;
   color: grey;
+}
+
+h3{
+  padding-top: 0px;
+  position: relative;
+  margin-top: -10px;
+  font-size: 40px;
+  font-family: 'Sofia', cursive;
+  color: black;
+  text-align: center;
 }
 
 .buttonsList1 {
@@ -155,7 +165,7 @@ nav a{
 }
 
 @media (min-width: 256px) and (max-width: 800px) {
-  input[type = text]
+  input[type = text], input[type=password]
   {
     width: 80%;
   }
@@ -168,4 +178,135 @@ nav a{
     width:70%;
   }
 
+}
+
+
+.register-box
+{
+  position: relative;
+  background-color: #B22828;
+  border: black 1px solid;
+  border-radius: 5px;
+
+  width: 900px;
+  height: 700px;
+  max-width: 90%;
+  max-height: 90%;
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#emailId
+{
+  padding-bottom: -10px;
+	position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  top: -40px;
+  left: 20px;
+}
+
+#usernameId
+{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  top: -30px;
+  left: 20px;
+}
+
+#passwordId
+{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: 20px;
+  top: -20px;
+}
+
+#confirmPasswordId
+{
+  position: relative;
+  left: 20px;
+  top: -10px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+}
+
+#surnameId
+{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: 20px;
+  top: -20px;
+}
+
+#nameId{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: 20px;
+  top: -20px;
+}
+
+#phoneId{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: 20px;
+  top: -20px;
+}
+
+#addressId{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: 20px;
+  top: -20px;
+}
+
+input[type = submit]
+{
+  font-family: 'Noto Sans', sans-serif;
+  font-size:15px;
+  cursor: pointer;
+  background-color:  #F7DCBA;
+	border-radius:2px;
+
+  /* to make bigger button */
+	padding:8px 12px;
+
+  margin-top: 60px;
+  margin-left: 160px;
+  position: relative;
+}
+
+#submitText:hover
+{
+  background-color:rgb(225,33,56);
+  color: #A1EE2F;
+}
+
+#alreadyAccountId
+{
+  position: absolute;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+  margin-top: 220px;
+  margin-left: -30px;
 }
