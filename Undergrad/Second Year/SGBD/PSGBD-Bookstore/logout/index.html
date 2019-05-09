@@ -23,14 +23,13 @@
              <a href="#"> Login </a>
              <a href="#"> My Account </a>
 						 <a href="#"> Logout </a>
-
 		     </div>
 
 
     <div class = "buttonsList2">
 
       <div class = "buttonsList2left">
-		 		<input type="text" placeholder="Search product">
+		 		<input id="searchbar" type="text" placeholder="Search product">
       </div>
 
       <div class = "buttonsList2center">
@@ -58,7 +57,28 @@
     <div class = "mainDiv">
 			<row>
 				<col>
-			<img id ="picture" src="./css/bookstore.png">
+        <h3> Logout </h3>
+
+        <!-- MAIN BOX -->
+        <div class = "register-box">
+
+
+      <div class = "minibox">
+        <p id = "logoutItem"> Are you sure you want to log out? </p>
+      </div>
+
+      <div id = "registerButtonId">
+        <input type = "submit" name="register-button" value = "Yes" class = "submitText" >
+      </div>
+
+      <div id = "cancelButtonId">
+        <input type = "submit" name="cancel-button" value = "No" class = "submitText" >
+      </div>
+        </div>
+
+        <br>
+        <br>
+
 				</col>
 			</row>
     </div>

@@ -22,8 +22,7 @@
 		         <a href="#"> Register </a>
              <a href="#"> Login </a>
              <a href="#"> My Account </a>
-             <a href="#"> Logout </a>
-
+						 <a href="#"> Logout </a>
 		     </div>
 
 
@@ -58,7 +57,7 @@
     <div class = "mainDiv">
 			<row>
 				<col>
-        <h3> Create an account </h3>
+        <h3> My account: edit </h3>
 
         <!-- MAIN BOX -->
         <div class = "register-box">
@@ -66,54 +65,56 @@
 
         <!-- EMAIL -->
         <div id = "emailId">
-        <input type = "text" id = "emailText" placeholder = "Type your email.." name ="email" required>
+        <input type = "text" id = "emailText" placeholder = "Type your email.." value="cat@yahoo.com" name ="email" required>
         </div>
 
         <!-- USERNAME -->
         <div id = "usernameId">
-        <input type = "text" id = "usernameText" placeholder = "Type your username.." name ="user" required>
+        <input type = "text" id = "usernameText" placeholder = "Type your username.." value="catUsername" name ="user" required>
         </div>
 
         <!-- NAME -->
         <div id = "nameId">
-        <input type = "text" id = "usernameText" placeholder = "Type your name.." name ="name" required>
+        <input type = "text" id = "usernameText" placeholder = "Type your name.." value="catName" name ="name" required>
         </div>
 
         <!-- SURNAME -->
         <div id = "surnameId">
-        <input type = "text" id = "usernameText" placeholder = "Type your surname.." name ="surname" required>
+        <input type = "text" id = "usernameText" placeholder = "Type your surname.." value="catSurname" name ="surname" required>
         </div>
 
         <!-- PHONE -->
         <div id = "phoneId">
-        <input type = "text" id = "phoneText" placeholder = "Type your phone number.." name ="phone" required>
+        <input type = "text" id = "phoneText" placeholder = "Type your phone number.." value="catPhone" name ="phone" required>
         </div>
 
         <!-- ADDRESS -->
         <div id = "addressId">
-        <input type = "text" id = "addressText" placeholder = "Type your address.." name ="address" required>
+        <input type = "text" id = "addressText" placeholder = "Type your address.." value="catAddress" name ="address" required>
         </div>
 
         <!-- PASSWORD -->
         <div id = "passwordId">
-        <input type = "password" id = "passwordText" placeholder = "Type your password.." name = "pass" required>
+        <input type = "password" id = "passwordText" placeholder = "Type your password.." value="catPassword" name = "pass" required>
         </div>
 
         <!-- CONFIRM PASSWORD -->
         <div id = "confirmPasswordId">
-        <input type = "password" id = "confirmPasswordText" placeholder = "Confirm password" name = "passConfirm" required>
+        <input type = "password" id = "confirmPasswordText" placeholder = "Confirm password"   value="catPassword"  name = "passConfirm" required>
         </div>
 
-        <!-- REGISTER BUTTON -->
-        <div id = "registerButtonId">
-        <input type = "submit" name="register-button" value = "Create account" id = "submitText" >
-        </div>
+
 
         </form>
 
-        <!-- ALREADY HAVE AN ACCOUNT text -->
-        <a href = "#" id = "alreadyAccountId"> Already have an account? </a>
+        <!-- Save BUTTON -->
+        <div id = "registerButtonId">
+          <input type = "submit" name="register-button" value = "Save" class = "submitText" >
+        </div>
 
+        <div id = "cancelButtonId">
+          <input type = "submit" name="cancel-button" value = "Cancel" class = "submitText" >
+        </div>
         </div>
 
         <br>

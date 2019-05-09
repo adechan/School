@@ -1,0 +1,323 @@
+body{
+  height:100%;
+  margin:0px;
+  background-color: #F7DCBA;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.buttonsList2{
+  background-color: rgb(245,246,247);
+  overflow: auto;
+  display: flex;
+  text-align: center;
+}
+
+input[type = text], input[type = password]
+{
+  border-radius: 3px;
+  border: 1px solid grey;
+  width: 500px;
+  height: 35px;
+  max-width: 90%;
+  margin-top: 20px;
+}
+
+.buttonsList2center{
+  margin-left: 10%;
+  max-width: 20%;
+}
+
+.buttonsList2right{
+  margin-left: 27%;
+  max-width: 20%;
+}
+
+#h1{
+  font-size: 40px;
+  font-family: 'Sofia', cursive;
+}
+
+#h2{
+  padding-top: 0px;
+  position: relative;
+  margin-top: -10px;
+  font-size: 17px;
+  font-family: 'Baloo Bhai', cursive;
+  color: grey;
+}
+
+h3{
+  padding-top: 0px;
+  position: relative;
+  margin-top: -10px;
+  font-size: 40px;
+  font-family: 'Sofia', cursive;
+  color: black;
+  text-align: center;
+}
+
+.buttonsList1 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  width: 100vw;
+  background-color: rgb(225,33,56);
+  overflow: auto;
+
+}
+
+.buttonsList1 a {
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: center ;
+  text-decoration: none;
+  color: white ;
+  float: left;
+  padding: 10px ;
+  width: 10%;
+  text-align: center;
+}
+.buttonsList1 input{
+  text-align: center ;
+  text-decoration: none;
+  color: white ;
+  float: left;
+  padding: 10px ;
+  width: 10%;
+  text-align: center;
+  background-color:#222629 ;
+  border:0;
+}
+
+.buttonsList1 a:hover {
+  width: 10%;
+  background-color: #B22828;
+}
+
+
+.buttonsList3 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  width: 100vw;
+  background-color:#B22828 ;
+  overflow: auto;
+}
+
+.buttonsList3 a {
+  margin-left: 50px;
+  margin-right: 50px;
+  text-align: center ;
+  text-decoration: none;
+  color: white ;
+  float: left;
+  padding: 10px ;
+  width: 10%;
+  text-align: center;
+}
+
+.buttonsList3 a:hover {
+  width: 10%;
+  background-color:rgb(225,33,56) ;
+}
+
+
+footer nav{
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+	bottom:0;
+  height:35px;
+  text-decoration: none;
+  bottom:0;
+  padding-top: 10px;
+  width:100%;
+  background-color: rgb(245,246,247);
+  border:0;
+  text-align: center;
+}
+
+nav a{
+  text-decoration: none;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+#priceId{
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+}
+
+#shopCardId{
+    text-decoration: none;
+    font-family: 'Roboto Slab', serif;
+    font-size: 15px;
+    color: black;
+}
+
+.mainDiv{
+    margin-top: 10px;
+    align-items: center;
+}
+
+#picture{
+  margin-left: 10%;
+}
+
+@media (min-width: 256px) and (max-width: 800px) {
+  input[type = text], input[type=password]
+  {
+    width: 80%;
+  }
+
+  .buttonsList2right{
+    margin-left: 10%;
+  }
+
+  #picture{
+    width:70%;
+  }
+
+}
+
+
+.register-box
+{
+  position: relative;
+  background-color: #B22828;
+  border: black 1px solid;
+  border-radius: 5px;
+
+  width: 900px;
+  height: 700px;
+  max-width: 90%;
+  max-height: 90%;
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#emailId
+{
+  padding-bottom: -10px;
+	position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  top: -70px;
+  left: -45px;
+}
+
+#usernameId
+{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  top: -70px;
+  left: -45px;
+}
+
+#passwordId
+{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: -45px;
+  top: -70px;
+}
+
+#confirmPasswordId
+{
+  position: relative;
+  left: -45px;
+  top: -70px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+}
+
+#surnameId
+{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: -45px;
+  top: -70px;
+}
+
+#nameId{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: -45px;
+  top: -70px;
+}
+
+#phoneId{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: -45px;
+  top: -70px;
+}
+
+#addressId{
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  left: -45px;
+  top: -70px;
+}
+
+input[type = submit]
+{
+  font-family: 'Noto Sans', sans-serif;
+  font-size:15px;
+  cursor: pointer;
+  background-color:  #F7DCBA;
+	border-radius:2px;
+
+  /* to make bigger button */
+	padding:8px 12px;
+
+  margin-top: 500px;
+  margin-left: -190px;
+  position: relative;
+}
+
+.submitText:hover
+{
+  background-color:rgb(225,33,56);
+  color: #A1EE2F;
+}
+
+#alreadyAccountId
+{
+  position: absolute;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+  margin-top: 220px;
+  margin-left: -30px;
+}
+
+#cancelButtonId{
+  position: absolute;
+  margin-top: -10px;
+  margin-left: 100px;
+}
+
+#registerButtonId{
+  margin-top: -20px;
+  margin-left: -140px;
+}
