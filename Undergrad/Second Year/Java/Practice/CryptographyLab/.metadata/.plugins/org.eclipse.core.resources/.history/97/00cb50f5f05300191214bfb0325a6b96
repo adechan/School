@@ -1,0 +1,26 @@
+package main;
+
+public class Stopwatch {
+	
+	private long start = 0;
+	
+	public Stopwatch()
+	{
+		
+	}
+	
+	public void start()
+	{
+		this.start = System.currentTimeMillis();
+	}
+	
+	public void stop()
+	{
+		
+	}
+	
+	public int elapsedMiliseconds()
+	{
+		
+	}
+}

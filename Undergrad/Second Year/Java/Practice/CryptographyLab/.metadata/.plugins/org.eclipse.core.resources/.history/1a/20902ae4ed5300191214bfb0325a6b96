@@ -1,0 +1,43 @@
+package main;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Scanner;
+import rsa.RSAChinese;
+import main.Utility;
+import rsa.RSA;
+
+public class Main {
+	
+	public static void calculateRSA(RSA rsa)
+	{
+		Scanner in = new Scanner(System.in);
+		
+		// chinese 
+		System.out.println("Enter the plain text:");
+ 
+		String plaintext = in.nextLine();
+ 
+		System.out.println("Encrypting String: " + plaintext);
+		System.out.println("Unencrypted Bytes: " + Utility.byteString(plaintext.getBytes()));
+ 
+		// encrypt
+		byte[] encrypted = rsa.encryptText(plaintext);
+		System.out.println("Encrypted Bytes: " +  Utility.byteString(encrypted));
+		System.out.println("Encrypted String: " +  new String(encrypted));
+ 
+		// decrypt
+		byte[] decrypted = rsa.decryptText(encrypted);
+		System.out.println("Decrypted Bytes: " +   Utility.byteString(decrypted));
+		System.out.println("Decrypted String: " + new String(decrypted));
+		
+		in.close();
+	}
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws IOException
+	{
+		calculateRSA(new RSA());
+	}
+}

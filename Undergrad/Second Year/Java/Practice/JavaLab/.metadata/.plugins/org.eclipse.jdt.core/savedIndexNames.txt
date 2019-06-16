@@ -1,0 +1,18 @@
+INDEX VERSION 1.131+C:\Users\Andreea Rindasu\eclipse-workspace\JavaLab\.metadata\.plugins\org.eclipse.jdt.core
+1312047765.index
+247679014.index
+2141923848.index
+3993047964.index
+3296187454.index
+818070248.index
+2831395150.index
+3994460472.index
+3917178145.index
+278857001.index
+3271193799.index
+2658948535.index
+4118189793.index
+1708015789.index
+1886532763.index
+1965144681.index
+2568065454.index

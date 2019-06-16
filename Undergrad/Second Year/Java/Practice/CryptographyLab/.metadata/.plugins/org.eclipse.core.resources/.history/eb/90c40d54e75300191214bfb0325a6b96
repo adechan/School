@@ -1,0 +1,41 @@
+package main;
+
+import java.math.BigInteger;
+
+public class Utility {
+	
+	/**
+	 * Function that computes the greatest common divisor of integers a and b.
+	 * @param a integer
+	 * @param b integer
+	 * @return the greatest common divisor of a and b
+	 */
+	public static int extendedEuclidianAlgorithm(int a, int b)
+	{
+		int temp;
+		while(true)
+		{
+			temp = a % b;
+			if (temp == 0)
+				return b;
+			a = b;
+			b = temp;
+		}
+		
+	}
+	
+	/**
+	 * Function that converts the bytes into strings. ???????????????
+	 * @param encrypted byte text
+	 * @return a String of bytes.
+	 */
+	public static String byteString(byte[] encrypted) 
+	{ 
+		String result = "";
+		for (byte b : encrypted) 
+		{
+			result += Byte.toString(b);
+		}
+		return result;
+	}
+}

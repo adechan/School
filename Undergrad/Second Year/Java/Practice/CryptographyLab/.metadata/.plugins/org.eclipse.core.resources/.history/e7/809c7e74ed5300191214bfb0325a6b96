@@ -1,0 +1,49 @@
+package rsa;
+
+import java.math.BigInteger;
+import java.util.Random;
+
+public class RSAChinese extends RSA {
+	
+	private BigInteger dp;
+	private BigInteger dq;
+	private BigInteger qinv;
+	
+	private BigInteger m1;
+	private BigInteger m2;
+	private BigInteger h;
+	private BigInteger m;
+	
+	// Generates a public key for encryption and a private key for decryption
+	public RSAChinese()
+	{
+		super();
+		
+		BigInteger p = this.getP();
+		BigInteger q = this.getQ();
+		dp = d.remainder(p.subtract(BigInteger.ONE));
+		dq = d.remainder(q.subtract(BigInteger.ONE));
+		qinv = q.modInverse(p);	
+	}
+	
+	@Override
+	public byte[] decryptText(String ciphertext)
+	{
+		return this.decryptText(ciphertext.getBytes());
+	}
+
+	@Override
+	public byte[] decryptText(byte[] ciphertext)
+	{
+		BigInteger p = this.rsa.getP();
+		BigInteger q = this.rsa.getQ();
+		
+		BigInteger messageInt = new BigInteger(ciphertext);
+		
+		BigInteger m1 = messageInt.modPow(dp, p);
+	    BigInteger m2 = messageInt.modPow(dq, q);
+	    BigInteger h = ((m1.subtract(m2)).multiply(qinv)).remainder(p);
+	    return (h.multiply(q)).add(m2).toByteArray();
+	}
+	
+}

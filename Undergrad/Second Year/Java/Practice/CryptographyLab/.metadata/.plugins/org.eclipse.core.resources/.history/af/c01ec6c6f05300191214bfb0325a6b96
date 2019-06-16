@@ -1,0 +1,19 @@
+package main;
+
+public class Stopwatch {
+	
+	
+	
+	public Stopwatch()
+	{
+		
+	}
+	
+	public void start()
+	{}
+	
+	public void stop()
+	{
+		
+	}
+}

@@ -1,0 +1,24 @@
+1552818762480	Delete element
+1552819084691	Delete element
+1552819954703	Delete element
+1552820064701	Delete element
+1552820760050	Delete element
+1552820765353	Delete element
+1552842374264	Rename type 'GraphicalInterface'
+1552844217422	Delete element
+1552845928166	Delete element
+1552846741110	Rename field 'path_definition_file'
+1552846748477	Rename field 'path_image_file'
+1552846753980	Rename field 'number_vertices'
+1552846757689	Rename field 'number_nodes'
+1552846771612	Rename local variable 'form_panel'
+1552846781131	Rename local variable 'control_panel'
+1552846788688	Rename local variable 'button_add_graph'
+1552846829883	Rename local variable 'save_button'
+1552846834851	Rename local variable 'load_button'
+1552846838398	Rename local variable 'open_button'
+1552846841992	Rename local variable 'list_button'
+1552847183537	Rename local variable 'type_directed'
+1552847187096	Rename local variable 'type_simple'
+1552847190086	Rename local variable 'list_component'
+1552847285006	Delete element

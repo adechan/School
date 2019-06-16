@@ -1,0 +1,92 @@
+package rsa;
+import java.math.BigInteger;
+import java.util.Random;
+
+/**
+ * A class describing the key generation for RSA and also the encryption and decryption. 
+ * Each entity creates an RSA public key and a corresponding private key. 
+ * The public key is used to encryption and the private key is used for decryption.
+ * @author Andreea Rindasu
+ *
+ */
+public class RSA {
+	
+	private BigInteger n;
+	private BigInteger e;
+	private BigInteger d;
+
+	private BigInteger p;
+	private BigInteger q;
+	
+	// Generates a public key for encryption and a private key for decryption
+	public RSA()
+	{
+		Random random = new Random();
+		
+		// Generate 2 large random and distinct primes p and q on 1024 bits 
+		// isProbablePrime: returns true if this number is probably prime with specified bitLength
+		this.p = BigInteger.probablePrime(1024, random);
+		this.q = BigInteger.probablePrime(1024, random);
+		
+		// n = p x q
+		this.n = p.multiply(q);
+		
+		// phi = (p - 1)(q - 1)
+		BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+		
+		// Select a random integer e, 1 < e < phi, such that gcd(e, pfi) = 1
+		e = BigInteger.probablePrime(512, random);
+		
+		while (phi.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(phi) < 0)
+			e.add(BigInteger.ONE);
+		
+		System.out.println("e is " + e);
+		// Use the extended Euclidian algorithm to compute the unique integer d, 
+		// 1 < d < pfi such taht ed congruent 1 mod pfi
+		d = e.modInverse(phi);
+		System.out.println("d is " + d);
+	}
+	
+	public BigInteger getPublicKey()
+	{
+		return this.e;
+	}
+	
+	public BigInteger getPrivateKey()
+	{
+		return this.d;
+	}
+	
+	public BigInteger getModulus()
+	{
+		return this.n;
+	}
+	
+	public BigInteger getP()
+	{
+		return this.p;
+	}
+	
+	public byte[] encryptText(byte[] message)
+	{
+		byte[] ciphertext = (new BigInteger(message)).modPow(e, n).toByteArray();
+		return ciphertext;
+	}
+	
+	public byte[] decryptText(byte[] ciphertext)
+	{
+		byte[] message = (new BigInteger(ciphertext)).modPow(d, n).toByteArray();
+		return message;
+	}
+	
+	public byte[] encryptText(String message)
+	{	
+		return this.encryptText(message.getBytes());
+	}
+	
+	public byte[] decryptText(String ciphertext)
+	{
+		return this.decryptText(ciphertext.getBytes());
+	}
+	
+}

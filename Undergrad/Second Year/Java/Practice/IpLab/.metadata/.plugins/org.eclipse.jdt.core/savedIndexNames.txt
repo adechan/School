@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+C:\Users\Andreea Rindasu\eclipse-workspace\IpLab\.metadata\.plugins\org.eclipse.jdt.core
+3791920001.index
+291607544.index
+912173147.index
+3580456661.index
+3368096806.index

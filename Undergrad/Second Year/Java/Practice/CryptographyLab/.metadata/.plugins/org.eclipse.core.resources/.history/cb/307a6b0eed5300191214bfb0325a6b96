@@ -1,0 +1,61 @@
+package rsa;
+
+import java.math.BigInteger;
+import java.util.Random;
+
+public class RSAChinese {
+	
+	private BigInteger n;
+	private BigInteger e;
+	private BigInteger d;
+	
+	private BigInteger dp;
+	private BigInteger dq;
+	private BigInteger qinv;
+	
+	private BigInteger m1;
+	private BigInteger m2;
+	private BigInteger h;
+	private BigInteger m;
+	
+	private RSA rsa = new RSA();
+	
+	// Generates a public key for encryption and a private key for decryption
+	public RSAChinese()
+	{
+		BigInteger p = this.rsa.getP();
+		BigInteger q = this.rsa.getQ();
+		dp = d.remainder(p.subtract(BigInteger.ONE));
+		dq = d.remainder(q.subtract(BigInteger.ONE));
+		qinv = q.modInverse(p);	
+	}
+	
+	public byte[] encryptText(byte[] message)
+	{
+		return this.rsa.encryptText(message);
+	}
+	
+	public byte[] encryptText(String message)
+	{
+		return this.rsa.encryptText(message);
+	}
+	
+	public byte[] decryptText(String ciphertext)
+	{
+		return this.decryptText(ciphertext.getBytes());
+	}
+	
+	public byte[] decryptText(byte[] ciphertext)
+	{
+		BigInteger p = this.rsa.getP();
+		BigInteger q = this.rsa.getQ();
+		
+		BigInteger messageInt = new BigInteger(ciphertext);
+		
+		BigInteger m1 = ciphertext.modPow(dp, p);
+	    BigInteger m2 = ciphertext.modPow(dq, q);
+	    BigInteger h = ((m1.subtract(m2)).multiply(qinv)).remainder(p);
+	    return (h.multiply()).add(m2).toByteArray();
+	}
+	
+}

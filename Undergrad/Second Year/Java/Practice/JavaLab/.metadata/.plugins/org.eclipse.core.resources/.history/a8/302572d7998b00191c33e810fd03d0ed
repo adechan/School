@@ -1,0 +1,11 @@
+package test;
+import test.dog;
+
+public class main {
+
+	public static void main(String[] args)
+	{
+		Dog wolfy = new Dog("Wolfy");
+	}
+
+}

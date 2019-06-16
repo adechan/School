@@ -1,0 +1,24 @@
+package main;
+
+public class Stopwatch {
+	
+	private long start;
+	
+	public Stopwatch()
+	{
+		
+	}
+	
+	public void start()
+	{}
+	
+	public void stop()
+	{
+		
+	}
+	
+	public int elapsedMiliseconds()
+	{
+		
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;nodes&apos; in &apos;main.Main.main(...)&apos; to &apos;nodesGraph&apos;&#x0D;&#x0A;- Original project: &apos;JavaLab3&apos;&#x0D;&#x0A;- Original element: &apos;main.Main.main(String[]).nodes&apos;&#x0D;&#x0A;- Renamed element: &apos;nodes&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;nodes&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/Main&lt;main{Main.java[Main~main~\[QString;@nodes!658!703!674!678!QArrayList\&lt;QNode;&gt;;!0!false" name="nodesGraph" references="true" stamp="1552253044194" version="1.0"/>
+</session>
