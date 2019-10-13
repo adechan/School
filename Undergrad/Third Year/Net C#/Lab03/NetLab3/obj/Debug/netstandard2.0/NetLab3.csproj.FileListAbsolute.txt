@@ -1,0 +1,8 @@
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\bin\Debug\netstandard2.0\NetLab3.deps.json
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\bin\Debug\netstandard2.0\NetLab3.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\bin\Debug\netstandard2.0\NetLab3.pdb
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\obj\Debug\netstandard2.0\NetLab3.csprojAssemblyReference.cache
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\obj\Debug\netstandard2.0\NetLab3.AssemblyInfoInputs.cache
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\obj\Debug\netstandard2.0\NetLab3.AssemblyInfo.cs
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\obj\Debug\netstandard2.0\NetLab3.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3\obj\Debug\netstandard2.0\NetLab3.pdb

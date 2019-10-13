@@ -1,0 +1,15 @@
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\NetLab3Test.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\NetLab3Test.pdb
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\NetLab3.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\NetLab3.pdb
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\obj\Debug\NetLab3Test.csprojAssemblyReference.cache
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\obj\Debug\NetLab3Test.csproj.CopyComplete
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\obj\Debug\NetLab3Test.dll
+C:\Users\Andreea Rindasu\source\repos\NetLab3\NetLab3Test\obj\Debug\NetLab3Test.pdb
