@@ -118,77 +118,6 @@ void decryptFileFindKey(std::string plaintext, std::string cryptotext, std::stri
 	}
 
 
-	/*
-	// for every word in the Hex'd words which acts as keys
-	for (const std::string& key : vectorWords)
-	{
-		if (key.empty() || key.find(" ") != std::string::npos)
-			continue;
-
-		// try to decrypt cryptotext using the key
-		std::cout << "Trying to decrypt the file with the key " << key;
-
-		// DECRYPT
-		const std::string cmd = "openssl enc -d -aes-256-ecb -a -salt -md md5 -in " + cryptotext + " -out " + decrypted + " -K " + key;
-		std::cout << "\nDecryption done!";
-
-		std::system(cmd.c_str());
-
-
-		std::cout << "\nReading from plaintext..." << '\n';
-
-		// read from plaintext file
-		while (_plaintext.good())
-		{
-			_plaintext >> plaintextLine;
-			plaintextVector.push_back(std::move(plaintextLine));
-		}
-
-		std::ifstream _decrypted;
-		_decrypted.open(decrypted);
-
-		std::cout << "\nReading from decrypted text..." << '\n';
-
-		// read from decrypted file
-		while (_decrypted.good())
-		{
-			_decrypted >> decryptedLine;
-			decryptedVector.push_back(std::move(decryptedLine));
-		}
-
-		std::cout << "Plaintext: ";
-		for (const auto& txt : plaintextVector)
-			std::cout << txt << " ";
-		std::cout << '\n';
-
-		std::cout << "Decrypted: ";
-		for (const auto& txt : decryptedVector)
-			std::cout << txt << " ";
-		std::cout << '\n';
-
-		std::cout << "Plaintext size: " << plaintextVector.size() << '\n';
-		std::cout << "Decrypted size: " << decryptedVector.size() << '\n';
-
-		if (plaintextVector.empty() || decryptedVector.empty())
-			return;
-
-		const auto key_found = std::equal(plaintextVector.begin(), plaintextVector.end(), 				decryptedVector.begin());
-
-		if (key_found)
-		{
-			std::cout << "You found the key! The key is: " << key << '\n';
-			return;
-		}
-	}
-
-	return;*/
-
-	/*std::cout << "Key to test: " << vectorWords[0];
-	const std::string cmd = "openssl enc -d -aes-256-ecb -a -salt -md md5 -in " + cryptotext + " -out " + decrypted + " -K " + vectorWords[2];
-	std::cout << "\nDecryption done!";
-
-	std::system(cmd.c_str());*/
-
 	// for every key try to decrypt the text
 	for (const auto& key : vectorWords)
 	{
@@ -261,16 +190,6 @@ void decryptFileFindKey(std::string plaintext, std::string cryptotext, std::stri
 			std::cout << "Key in english word is: " << string_of_hex(key) << '\n';
 			return;
 		}
-
-		/*std::cout << "\nS T O P";
-		if (plaintext == decrypted)
-		{
-			std::cout << '\n';
-			std::cout << "Key found: " << key << '\n';
-			std::cout << "Number of tries is " << countTries << '\n';
-			std::cout << "Key in english word is: " << string_of_hex(key) << '\n';
-			return;
-		}*/
 	}
 
 
@@ -279,7 +198,6 @@ void decryptFileFindKey(std::string plaintext, std::string cryptotext, std::stri
 
 int main(void)
 {
-	//std::cout << "\x63\x69\x70" << '\n';
 	encryptFile("~/Desktop/plaintext", "eye");
 
 	decryptFileFindKey("plaintext", "cryptotext", "englishWords");
