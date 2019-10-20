@@ -7,24 +7,9 @@ namespace NetLab3Test
     [TestClass]
     public class ArchitectTest
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            // Arrange 
-            Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
-               new DateTime(2019, 09, 30), 3000);
-
-            // Act
-            string name = architect.firstName;
-            string fullName = architect.GetFullName();
-
-            // Assert
-            Assert.AreEqual("Shaun", architect.firstName);
-            Assert.AreEqual("Ostoic", architect.lastName);
-        }
 
         [TestMethod]
-        public void TestMethod2()
+        public void GivenNewArchitect_WhenGettingFullName()
         {
             // Arrange 
             Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
@@ -34,11 +19,11 @@ namespace NetLab3Test
             string fullName = architect.GetFullName();
 
             // Assert
-            Assert.AreEqual("Shaun Ostoic", architect.GetFullName());
+            Assert.AreEqual("Shaun Ostoic", fullName);
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public void GiveNewArchitect_WhenSalute_ThenSalute()
         {
             // Arrange 
             Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
@@ -52,49 +37,59 @@ namespace NetLab3Test
         }
 
         [TestMethod]
-        public void TestMethod4()
+        public void GivenNewArchitect_WhenStartDate2019_ThenStartDate2019()
         {
             // Arrange 
             Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
                new DateTime(2019, 09, 30), 3000);
 
             // Act
-            string name = architect.firstName;
-            string fullName = architect.GetFullName();
-
+            DateTime date = architect.startDate;
             // Assert
-            Assert.AreEqual(new DateTime(2019, 06, 29), architect.startDate);
-            Assert.AreEqual(new DateTime(2019, 09, 30), architect.endDate);
+            Assert.AreEqual(new DateTime(2019, 06, 29), date);
+
         }
 
         [TestMethod]
-        public void TestMethod5()
+        public void GivenNewArchitect_WhenEndDate2019_ThenEndDate2019()
         {
             // Arrange 
             Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
                new DateTime(2019, 09, 30), 3000);
 
             // Act
-            string name = architect.firstName;
-            string fullName = architect.GetFullName();
-
+            DateTime date = architect.endDate;
             // Assert
-            Assert.AreEqual("Ostoic", architect.lastName);
+            Assert.AreEqual(new DateTime(2019, 09, 30), date);
         }
 
         [TestMethod]
-        public void TestMethod6()
+        public void GivenNewArchitect_WhenLastNameOstoic_ThenLastNameOstoic()
         {
             // Arrange 
             Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
                new DateTime(2019, 09, 30), 3000);
 
             // Act
-            string name = architect.firstName;
-            string fullName = architect.GetFullName();
+            string lastName = architect.lastName;
 
             // Assert
-            Assert.AreEqual(3000, architect.salary);
+            Assert.AreEqual("Ostoic", lastName);
+        }
+
+
+        [TestMethod]
+        public void GivenNewArchitect_WhenSalary3000_ThenSalary3000()
+        {
+            // Arrange 
+            Architect architect = new Architect("Shaun", "Ostoic", new DateTime(2019, 06, 29),
+               new DateTime(2019, 09, 30), 3000);
+
+            // Act
+            int salary = architect.salary;
+
+            // Assert
+            Assert.AreEqual(3000, salary);
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using NetLab3;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,7 +8,7 @@ namespace NetLab3Test
     public class ManagerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GivenNewManager_WhenFirstLastName_ThenGetFullName()
         {
             // Arrange
             Manager manager = new Manager("Andreea", "Rindasu", new DateTime(2019, 05, 30), new DateTime(2020, 05, 30), 4500);
@@ -19,46 +17,47 @@ namespace NetLab3Test
             string fullName = manager.GetFullName();
 
             // Assert
-            Assert.AreEqual("Andreea Rindasu", manager.GetFullName());
+            Assert.AreEqual("Andreea Rindasu", fullName);
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void GivenNewManager_WhenSalutation_ThenSalutation()
         {
             // Arrange
             Manager manager = new Manager("Andreea", "Rindasu", new DateTime(2019, 05, 30), new DateTime(2020, 05, 30), 4500);
 
             // Act
-            
+            string salutation = manager.Salutation();
 
             // Assert
-            Assert.AreEqual("Hello manager, Andreea Rindasu", manager.Salutation());
+            Assert.AreEqual("Hello manager, Andreea Rindasu", salutation);
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public void GivenNewManager_WhenEndDate2019_ThenIsNotActive()
         {
             // Arrange
             Manager manager = new Manager("Andreea", "Rindasu", new DateTime(2019, 05, 30), new DateTime(2019, 07, 30), 4500);
 
             // Act
+            bool active = manager.IsActive();
 
 
             // Assert
-            Assert.AreEqual(false, manager.IsActive());
+            Assert.AreEqual(false, active);
         }
 
         [TestMethod]
-        public void TestMethod4()
+        public void GivenNewManager_WhenEndDate2019_ThenIsActive()
         {
             // Arrange
             Manager manager = new Manager("Andreea", "Rindasu", new DateTime(2019, 05, 30), new DateTime(2019, 10, 30), 4500);
 
             // Act
-
+            bool active = manager.IsActive();
 
             // Assert
-            Assert.AreEqual(true, manager.IsActive());
+            Assert.AreEqual(true, active);
         }
     }
 }
