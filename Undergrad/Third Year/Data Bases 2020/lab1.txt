@@ -1,0 +1,50 @@
+CREATE TABLE studenti(
+nr_matricol VARCHAR2(6) NOT NULL,
+nume VARCHAR2(10) NOT NULL,
+prenume VARCHAR2(10),
+an NUMBER(1),
+grupa CHAR(2),
+bursa NUMBER(6,2),
+data_nastere DATE
+);
+
+CREATE TABLE cursuri(
+id_curs VARCHAR(4) NOT NULL,
+titlu_curs VARCHAR2(10) NOT NULL,
+an NUMBER(1),
+semestru NUMBER(1),
+credite NUMBER(2)
+);
+
+CREATE TABLE note(
+nr_matricol CHAR(6) NOT NULL,
+id_curs CHAR(4) NOT NULL,
+valoare NUMBER(2),
+data_notare DATE
+);
+
+CREATE TABLE profesori(
+id_prof CHAR(4) NOT NULL,
+nume CHAR(10) NOT NULL,
+prenume CHAR(10),
+grad_didactic VARCHAR2(5)
+);
+
+CREATE TABLE didactic(
+id_prof CHAR(4) NOT NULL,
+id_curs CHAR(4) NOT NULL
+);
+
+INSERT INTO studenti(nr_matricol, nume, prenume, an, grupa, bursa, data_nastere)
+	values('123456', 'Popescu', 'Ionut', 2, NULL, NULL, NULL);
+	
+INSERT INTO profesori(id_prof, nume, prenume, grad_didactic) 
+	values('1111', 'Masalagiu', 'Cristian', NULL);
+
+INSERT INTO cursuri(id_curs, titlu_curs, an, semestru, credite) 
+	values('1112', 'Logica', 1, 1, NULL);
+	
+INSERT INTO didactic(id_prof, id_curs) values('1111', '1112');
+
+INSERT INTO note(nr_matricol, id_curs, valoare, data_notare) 
+	values('123456', '1112', '10', NULL);
