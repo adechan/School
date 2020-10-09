@@ -1,0 +1,54 @@
+SELECT * from studenti;
+SELECT (bursa + 100) / 2 from studenti;
+
+1. SELECT nume, prenume, an, data_nastere from studenti;
+	SAVE
+	-> / (pentru a executa interogarea)
+	SAVE "C:\Users\Andreea Rindasu\Desktop\p1.sql";
+
+2. SELECT DISTINCT bursa from studenti;
+
+3. GET "C:\Users\Andreea Rindasu\Desktop\p1.sql";
+	EDIT
+	(modifica interogarea): 
+	SELECT nume AS "NUME", prenume AS "PRENUME", an AS "AN", 
+	data_nastere AS "DATA NASTERE" from studenti;
+	-> /
+
+4. SELECT nume || ' ' || prenume || ',' || an as "Studenti pe ani de studiu"
+	FROM studenti ORDER BY an ASC;
+	
+5. SELECT nume, prenume, data_nastere FROM studenti 
+	WHERE data_nastere BETWEEN '01-01-1995' AND '10-06-1997'
+	ORDER BY an DESC;
+	
+6. SELECT nume, prenume, an FROM studenti
+	WHERE data_nastere LIKE '%1995';
+	
+7. SELECT * FROM studenti WHERE bursa IS NULL;
+
+8. SELECT nume, prenume FROM studenti 
+	WHERE (bursa IS NOT NULL AND an IN(2, 3)) 
+	ORDER BY nume ASC, prenume DESC;
+	
+9. SELECT nume, prenume, bursa + (bursa * 15) / 100 as "Bursa marita" FROM studenti
+	WHERE bursa IS NOT NULL;
+	
+10. SELECT nume, prenume FROM studenti
+	WHERE (nume LIKE 'P%' AND an = 1);
+	
+11. 
+	(at least 2 x 'a')
+	SELECT * FROM studenti 
+	WHERE prenume LIKE 'A%a%' OR prenume LIKE '%a%a%';
+	
+	(2 x 'a')
+	
+12. SELECT * FROM studenti 
+	WHERE prenume IN('Alexandru', 'Ioana', 'Marius');
+	
+13. SELECT nume, prenume FROM studenti 
+	WHERE (bursa IS NOT NULL AND grupa LIKE 'A_');
+	
+14. SELECT nume, prenume FROM profesori 
+	WHERE TRIM(prenume) LIKE '%n';
