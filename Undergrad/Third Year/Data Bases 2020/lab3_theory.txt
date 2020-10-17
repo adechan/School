@@ -1,0 +1,49 @@
+Functii numerice: 
+SELECT CEIL(51.3) FROM DUAL;
+SELECT FLOOR(51.3) FROM DUAL;
+SELECT ROUND(21.365, 2) FROM DUAL; // rotunjeste 21.365 la 21.37
+SELECT ROUND(21.665, -1) FROM DUAL;
+SELECT TRUNC(21.365, 2) FROM DUAL;
+SELECT TRUNC(21.665, -1) FROM DUAL;
+SELECT MOD(21, 11) FROM DUAL;
+
+Functii ce iau ca argument date character si returneaza valori numerice
+SELECT LENGTH('cuvant') FROM DUAL;
+SELECT ASCII('A') FROM DUAL;
+SELECT INSTR('CORPORATE FLOOR', 'OR', 3, 2) FROM DUAL;
+SELECT nume, INSTR(nume, 'ra') FROM profesori;
+
+Functii ce iau ca argument date character si returneaza date character
+SELECT INITCAP('prima litera majuscula') FROM DUAL;
+SELECT UPPER('Stefan') FROM DUAL;
+SELECT LOWER('LOWER') FROM DUAL;
+SELECT REVERSE('LIVE') FROM DUAL;
+SELECT CONCAT( CONCAT(nume, ' este student in anul '), an) FROM studenti;
+SELECT SUBSTR('ABCDEFG',3,4) FROM DUAL;
+SELECT RPAD(nume,12,'ab') FROM studenti WHERE nume = 'Popescu';
+SELECT LPAD('Pagina',15,'*.') FROM DUAL;
+SELECT CHR(68)||CHR(65)||CHR(84)||CHR(69) FROM DUAL;
+SELECT '-'||TRIM('   test   ')||'-' AS "Fara spatii" FROM DUAL;
+SELECT '-'||LTRIM('   test   ')||'-' AS "Fara spatiile de la inceput" FROM DUAL;
+SELECT REPLACE('Andrei','i','ea') FROM DUAL;
+SELECT TRANSLATE('48KLM980', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', '9999999999XXXXXXXXXXXXXXXXXXXXXXXXXX') "COD" FROM DUAL;
+
+Functii pentru date
+SELECT CURRENT_DATE FROM DUAL;
+SELECT CURRENT_TIMESTAMP FROM DUAL;
+SELECT SYSDATE FROM DUAL;
+SELECT MONTHS_BETWEEN(
+TO_DATE('02-02-2015','MM-DD-YYYY'), TO_DATE('01-01-2015','MM-DD-YYYY') ) AS "Months" FROM DUAL;
+SELECT data_nastere, ADD_MONTHS(data_nastere,1) FROM studenti WHERE nume= 'Popescu';
+SELECT NEXT_DAY('16-10-20','MARTI') FROM DUAL;
+SELECT SYSDATE, LAST_DAY(SYSDATE) AS "Last" FROM DUAL;
+SELECT ROUND (TO_DATE ('27-OCT-16','DD-MON-YY'),'YEAR')"New Year" FROM DUAL;
+SELECT TRUNC(TO_DATE('27-OCT-16','DD-MON-YY'), 'YEAR')"First day of the current year" FROM DUAL;
+SELECT TRUNC(TO_DATE('27-OCT-16','DD-MON-YY'), 'MONTH')"First day of the current month" FROM DUAL;
+
+SELECT TO_CHAR('01110' + 1) FROM dual;
+
+
+
+
+
