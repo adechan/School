@@ -1,0 +1,34 @@
+1. SELECT SYSDATE AS "Astazi" FROM DUAL;
+
+2. SELECT nume, data_nastere, MONTHS_BETWEEN(SYSDATE, data_nastere) FROM studenti;
+
+3. SELECT TO_CHAR(data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') FROM studenti;
+
+4. SELECT CONCAT('Elevul ', CONCAT(prenume, CONCAT(' este in grupa ', grupa))) FROM studenti;
+
+5. SELECT RPAD(bursa, 10, '$') FROM studenti;
+
+6. SELECT LOWER(SUBSTR(nume, 1, 1)) || UPPER(SUBSTR(nume, 2, LENGTH(nume) - 1)) as "NAME", LENGTH(TRIM(nume)) FROM profesori
+	WHERE UPPER(TRIM(nume)) LIKE 'B%';
+	
+7. 
+
+8. SELECT nume, prenume, TO_CHAR(data_nastere, 'Month', 'NLS_DATE_LANGUAGE=english') as "MONTH" FROM studenti
+	WHERE bursa IS NULL 
+	ORDER BY  TO_CHAR(data_nastere, 'MM', 'NLS_DATE_LANGUAGE=english');
+	
+9. SELECT nume, bursa, DECODE(bursa, 450, 'Premiul 1', 350, 'Premiul 2', 250, 'Premiul 3', 'Mentiune') as "Premiu" FROM studenti;
+
+10. SELECT TRANSLATE(nume, 'ia', 'ai') FROM studenti;
+	SELECT TRANSLATE(SUBSTR(nume, 1, 1), 'IA', 'AI') || TRANSLATE(SUBSTR(nume, 2, LENGTH(nume) - 1), 'ia', 'ai') as "New name" FROM studenti;
+	
+11.	
+
+12. SELECT nume, TRUNC(TO_DATE(ADD_MONTHS(SYSDATE, 1), 'DD-MM-YYYY'), 'MM'), 
+		NVL(DECODE(bursa, 450, 450 + 450 * 10 / 100, 350, 350 + 350 * 15 / 100, 250, 250 + 250 * 20 / 100), 0) as "Bursa Noua" FROM studenti;
+	
+13. SELECT nume, LPAD(DECODE(bursa, 450, '*********', 350, '*******', 250, '*****'), 10 ,' ') as "Bursa" FROM studenti
+	WHERE bursa IS NOT NULL;
+	
+	SELECT nume, LPAD(RPAD(' ', FLOOR(bursa/50) + 1, '*') , 10, ' ') FROM studenti 
+	WHERE bursa IS NOT NULL;
