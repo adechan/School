@@ -11,7 +11,8 @@
 6. SELECT LOWER(SUBSTR(nume, 1, 1)) || UPPER(SUBSTR(nume, 2, LENGTH(nume) - 1)) as "NAME", LENGTH(TRIM(nume)) FROM profesori
 	WHERE UPPER(TRIM(nume)) LIKE 'B%';
 	
-7. 
+7. SELECT nume, data_nastere, ADD_MONTHS(data_nastere, ceil(MONTHS_BETWEEN(SYSDATE, data_nastere) / 12) * 12) as "Next Birthday",
+	NEXT_DAY(ADD_MONTHS(data_nastere, ceil(MONTHS_BETWEEN(SYSDATE, data_nastere) / 12) * 12), 'Duminica') as "Next Sunday" FROM studenti;
 
 8. SELECT nume, prenume, TO_CHAR(data_nastere, 'Month', 'NLS_DATE_LANGUAGE=english') as "MONTH" FROM studenti
 	WHERE bursa IS NULL 
@@ -22,7 +23,11 @@
 10. SELECT TRANSLATE(nume, 'ia', 'ai') FROM studenti;
 	SELECT TRANSLATE(SUBSTR(nume, 1, 1), 'IA', 'AI') || TRANSLATE(SUBSTR(nume, 2, LENGTH(nume) - 1), 'ia', 'ai') as "New name" FROM studenti;
 	
-11.	
+11.	SELECT nume, FLOOR(MONTHS_BETWEEN(SYSDATE, data_nastere) / 12) || ' ani ' 
+	|| CEIL(MOD(MONTHS_BETWEEN(SYSDATE, data_nastere), 12)) 
+	|| ' luni si ' 
+	|| ' zile'
+	AS "ANI" FROM studenti;
 
 12. SELECT nume, TRUNC(TO_DATE(ADD_MONTHS(SYSDATE, 1), 'DD-MM-YYYY'), 'MM'), 
 		NVL(DECODE(bursa, 450, 450 + 450 * 10 / 100, 350, 350 + 350 * 15 / 100, 250, 250 + 250 * 20 / 100), 0) as "Bursa Noua" FROM studenti;
