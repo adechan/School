@@ -20,12 +20,13 @@
 	
 9. SELECT nume, bursa, DECODE(bursa, 450, 'Premiul 1', 350, 'Premiul 2', 250, 'Premiul 3', 'Mentiune') as "Premiu" FROM studenti;
 
-10. SELECT TRANSLATE(nume, 'ia', 'ai') FROM studenti;
+10. SELECT TRANSLATE(nume, 'iaAI', 'aiIA') FROM studenti;
 	SELECT TRANSLATE(SUBSTR(nume, 1, 1), 'IA', 'AI') || TRANSLATE(SUBSTR(nume, 2, LENGTH(nume) - 1), 'ia', 'ai') as "New name" FROM studenti;
 	
 11.	SELECT nume, FLOOR(MONTHS_BETWEEN(SYSDATE, data_nastere) / 12) || ' ani ' 
 	|| CEIL(MOD(MONTHS_BETWEEN(SYSDATE, data_nastere), 12)) 
 	|| ' luni si ' 
+	|| FLOOR(SYSDATE - ADD_MONTHS(data_nastere, FLOOR(MONTHS_BETWEEN(SYSDATE, data_nastere))))
 	|| ' zile'
 	AS "ANI" FROM studenti;
 
