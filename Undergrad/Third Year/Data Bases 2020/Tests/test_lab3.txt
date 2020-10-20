@@ -1,0 +1,31 @@
+select * from studenti where prenume like 'A%' and bursa is not null;
+
+select nume || prenume as "Studenti bursieri" from studenti 
+where bursa is not null and bursa + (bursa * 10) /100 > 300;
+
+select id_curs from cursuri 
+minus
+select id_curs from note;
+
+
+select nume, prenume from studenti 
+where (bursa is not null and (grupa like 'A%' or grupa like 'B%') and 
+data_nastere like '%1996');
+
+
+select prenume from studenti where grupa like 'A%'
+intersect 
+select  prenume from studenti where grupa like 'B%';
+
+
+select titlu_curs from cursuri 
+where semestru=1 and (an like '1' or an like '2')
+order by an asc;
+
+
+select id_curs from cursuri 
+minus 
+(select id_curs from cursuri 
+minus
+select id_curs from note
+);
