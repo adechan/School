@@ -1,0 +1,38 @@
+SELECT * FROM studenti JOIN note ON studenti.nr_matricol = note.nr_matricol ORDER BY nume;
+SELECT * FROM studenti JOIN note ON studenti.nr_matricol = note.nr_matricol WHERE prenume='Andrei';
+SELECT * FROM studenti JOIN note ON studenti.nr_matricol = note.nr_matricol WHERE prenume='Ioana';
+
+# Se foloseste NATURAL JOIN cand numele atributelor sunt la fel in ambele tabele
+SELECT nume, prenume, valoare FROM studenti NATURAL JOIN note WHERE prenume='Ioana'; 
+
+SELECT nume, prenume, valoare, studenti.nr_matricol FROM studenti JOIN note ON studenti.nr_matricol = note.nr_matricol WHERE prenume = 'Ioana';
+SELECT nume, prenume, valoare, nr_matricol FROM studenti NATURAL JOIN note WHERE prenume='Ioana';
+SELECT nume, prenume, valoare, s.nr_matricol FROM studenti s JOIN note n ON s.nr_matricol = n.nr_matricol;
+
+# studenti care au note
+SELECT DISTINCT nume FROM studenti s NATURAL JOIN note n;
+
+# se prelueaza toti studentii din primul tabel, si se completeaza
+# cu studentii care nu au fost luati in join din al doilea tabel
+SELECT DISTINCT nume FROM studenti s LEFT OUTER JOIN note n ON s.nr_matricol = n.nr_matricol;
+
+# se prelueaza toti studentii din al doilea tabel, si se completeaza
+# cu studentii care nu au fost luati in join din primul tabel
+SELECT DISTINCT nume FROM note n RIGHT OUTER JOIN studenti s ON s.nr_matricol = n.nr_matricol;
+
+# se prelueaza toti studentii din primul tabel, si se completeaza
+# cu studentii care nu au fost luati in join din al doilea tabel +
+# se prelueaza toti studentii din al doilea tabel, si se completeaza
+# cu studentii care nu au fost luati in join din primul tabel
+SELECT DISTINCT nume FROM note n FULL OUTER JOIN studenti s ON s.nr_matricol = n.nr_matricol;
+
+SELECT nume, prenume, titlu_curs, valoare 
+   FROM studenti s 
+              JOIN note n ON s.nr_matricol=n.nr_matricol 
+              JOIN cursuri c ON c.id_curs=n.id_curs
+			  
+
+# SELF JOIN
+SELECT s.nume || ' ' || s.prenume || ' este coleg cu ' || colegi.nume || ' ' || colegi.prenume AS "Colegi de grupa" 
+    FROM studenti s JOIN studenti colegi ON s.grupa=colegi.grupa AND s.an=colegi.an
+    WHERE s.prenume='Andrei' AND s.nr_matricol != colegi.nr_matricol;
