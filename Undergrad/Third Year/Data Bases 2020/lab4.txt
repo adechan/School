@@ -1,0 +1,43 @@
+1. SELECT s.nume, s.prenume, n.valoare, p.nume, p.prenume FROM studenti s 
+	JOIN note n ON s.nr_matricol = n.nr_matricol 
+	JOIN didactic d ON n.id_curs = d.id_curs 
+	JOIN profesori p ON d.id_prof = p.id_prof;
+	
+2. SELECT s.nume, s.prenume FROM studenti s
+	JOIN note n ON s.nr_matricol = n.nr_matricol
+	JOIN cursuri c ON n.id_curs = c.id_curs
+	WHERE n.valoare = 10 AND c.titlu_curs = 'BD';
+	
+3. SELECT p.nume, p.prenume, c.titlu_curs FROM profesori p 
+	JOIN didactic d on p.id_prof = d.id_prof
+	JOIN cursuri c on d.id_curs = c.id_curs;
+	
+4. SELECT p.nume, p.prenume, c.titlu_curs FROM profesori p 
+	LEFT JOIN didactic d on p.id_prof = d.id_prof
+	LEFT JOIN cursuri c on d.id_curs = c.id_curs; 
+	
+5. SELECT p.nume, p.prenume, c.titlu_curs FROM profesori p 
+	RIGHT JOIN didactic d on p.id_prof = d.id_prof
+	RIGHT JOIN cursuri c on d.id_curs = c.id_curs; 
+
+6. SELECT p.nume, p.prenume, c.titlu_curs FROM profesori p 
+	FULL OUTER JOIN didactic d on p.id_prof = d.id_prof
+	FULL OUTER JOIN cursuri c on d.id_curs = c.id_curs; 
+	
+7. SELECT s1.nume || '-' || s2.nume as "People", TO_CHAR(s1.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') as "Birthday"
+	FROM studenti s1
+		JOIN studenti s2 on s1.nr_matricol != s2.nr_matricol
+	WHERE TO_CHAR(s1.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') = TO_CHAR(s2.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english')
+		AND s1.nume < s2.nume
+	ORDER BY TO_CHAR(s1.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') ASC, s1.nume ASC;
+
+8. SELECT s1.nume || ' ' || s1.prenume || ' a luat nota ' || n1.valoare || ' mai mare decat nota ' || 
+	n2.valoare || ' pe care a luat-o ' || s2.nume || ' ' || s2.prenume || 
+	' la materia ' || c.titlu_curs as "Nota mai mare"
+	FROM note n1
+		JOIN note n2 ON n1.id_curs = n2.id_curs
+		JOIN studenti s1 ON n1.nr_matricol = s1.nr_matricol
+		JOIN studenti s2 ON n2.nr_matricol = s2.nr_matricol
+		JOIN cursuri c ON c.id_curs = n1.id_curs AND c.id_curs = n2.id_curs
+	WHERE s1.nr_matricol != s2.nr_matricol AND n1.valoare > n2.valoare;
+	
