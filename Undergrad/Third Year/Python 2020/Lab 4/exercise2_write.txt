@@ -1,0 +1,2 @@
+C:\Users\Andreea Rindasu\PycharmProjects\PythonClass\Lab 4\Exercise2Directory\Afile1.txt
+C:\Users\Andreea Rindasu\PycharmProjects\PythonClass\Lab 4\Exercise2Directory\Afile2.txt
