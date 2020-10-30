@@ -14,12 +14,26 @@
 	JOIN note n ON c.id_curs = n.id_curs
 	WHERE n.valoare <= 8;
 	
-4. 
-
+4. SELECT s.nr_matricol, s.nume, s.prenume
+	FROM studenti s 
+	JOIN note n ON s.nr_matricol = n.nr_matricol
+   MINUS
+   SELECT s.nr_matricol,s.nume, s.prenume
+	FROM studenti s 
+	JOIN note n ON s.nr_matricol = n.nr_matricol
+	WHERE n.valoare < 7;
+	
 5. SELECT s.nume, c.titlu_curs, n.valoare
 	FROM studenti s 
 	JOIN note n ON s.nr_matricol = n.nr_matricol 
 	JOIN cursuri c ON n.id_curs = c.id_curs
 	WHERE (n.valoare = 7 OR n.valoare = 10) AND c.titlu_curs = 'OOP';
 	
-6. 
+6. SELECT s.nume, s.prenume, c.titlu_curs, n.valoare, 
+	TRIM(TO_CHAR(n.data_notare, 'MONTH')) || ', ' || TO_CHAR(n.data_notare, 'YYYY') as "Sesiune",
+	TO_CHAR(LAST_DAY(n.data_notare), 'dd') as "Days",
+	DECODE(TO_CHAR(LAST_DAY(n.data_notare), 'dd'), 30, NULL, 31, NULL, '+') as "Days"
+	FROM studenti s
+	JOIN note n ON s.nr_matricol = n.nr_matricol
+	JOIN cursuri c on n.id_curs = c.id_curs;
+	
