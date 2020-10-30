@@ -1,0 +1,25 @@
+1. SELECT s1.nume || ' - ' || s2.nume as "Students", 
+	ABS(FLOOR(MONTHS_BETWEEN(SYSDATE, s1.data_nastere)/12) -  FLOOR(MONTHS_BETWEEN(SYSDATE, s2.data_nastere)/12)) as "Age Difference"
+	FROM studenti s1
+	JOIN studenti s2 ON s1.nr_matricol <> s2.nr_matricol
+	WHERE s1.nume < s2.nume
+	ORDER BY 2 ASC;
+	
+2. SELECT s.nume || ' - ' || p.nume as "Friends"
+	FROM studenti s
+	JOIN profesori p ON LENGTH(s.nume) = LENGTH(TRIM(p.nume));
+	
+3. SELECT c.titlu_curs, n.valoare
+	FROM cursuri c
+	JOIN note n ON c.id_curs = n.id_curs
+	WHERE n.valoare <= 8;
+	
+4. 
+
+5. SELECT s.nume, c.titlu_curs, n.valoare
+	FROM studenti s 
+	JOIN note n ON s.nr_matricol = n.nr_matricol 
+	JOIN cursuri c ON n.id_curs = c.id_curs
+	WHERE (n.valoare = 7 OR n.valoare = 10) AND c.titlu_curs = 'OOP';
+	
+6. 
