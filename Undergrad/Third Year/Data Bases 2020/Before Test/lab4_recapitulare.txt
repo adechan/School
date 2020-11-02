@@ -1,0 +1,60 @@
+1. SELECT s.nume || ' ' || s.prenume as "Student", n.valoare, c.titlu_curs, 
+	p.nume || ' ' || p.prenume as "Profesor" 
+	FROM studenti s
+	JOIN note n ON s.nr_matricol = n.nr_matricol 
+	JOIN cursuri c ON c.id_curs = n.id_curs
+	JOIN didactic d ON c.id_curs = d.id_curs
+	JOIN profesori p ON p.id_prof = d.id_prof;
+	
+2. SELECT s.nume || ' ' || s.prenume as "Student"
+	FROM studenti s 
+	JOIN note n ON s.nr_matricol = n.nr_matricol
+	JOIN cursuri c ON c.id_curs = n.id_curs
+	WHERE n.valoare = 10 AND c.titlu_curs = 'BD';
+	
+3. SELECT p.nume || ' ' || p.prenume as "Profesor", c.titlu_curs
+	FROM profesori p 
+	JOIN didactic d ON p.id_prof = d.id_prof
+	JOIN cursuri c ON c.id_curs = d.id_curs;
+	
+# toti profesorii care au alocat un curs + profesorii care inca nu au alocat un curs	
+4. SELECT p.nume || ' ' || p.prenume as "Profesor", c.titlu_curs
+	FROM profesori p 
+	LEFT JOIN didactic d ON p.id_prof = d.id_prof
+	LEFT JOIN cursuri c ON c.id_curs = d.id_curs;
+	
+# doar acele cursuri care nu au inca un profesori
+5. SELECT p.nume || ' ' || p.prenume as "Profesor", c.titlu_curs
+	FROM profesori p 
+	RIGHT JOIN didactic d ON p.id_prof = d.id_prof
+	RIGHT JOIN cursuri c ON c.id_curs = d.id_curs
+   MINUS
+   SELECT p.nume || ' ' || p.prenume as "Profesor", c.titlu_curs
+	FROM profesori p 
+	JOIN didactic d ON p.id_prof = d.id_prof
+	JOIN cursuri c ON c.id_curs = d.id_curs;
+	
+6. SELECT p.nume || ' ' || p.prenume as "Profesor", c.titlu_curs
+	FROM profesori p 
+	FULL OUTER JOIN didactic d ON p.id_prof = d.id_prof
+	FULL OUTER JOIN cursuri c ON c.id_curs = d.id_curs;
+	
+7. SELECT s1.nume || ' - ' || s2.nume as "Studenti", 
+	TO_CHAR(s1.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') as "Day"
+	FROM studenti s1 
+	JOIN studenti s2 ON s1.nr_matricol != s2.nr_matricol
+	WHERE TO_CHAR(s1.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') = TO_CHAR(s2.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english')
+			AND s1.nume < s2.nume
+	ORDER BY 2 ASC, s1.nume ASC;
+	
+8. SELECT s1.nume || ' ' || s1.prenume as "Student 1",
+	n1.valoare as "Nota student 1",
+	s2.nume || ' ' || s2.prenume as "Student 2",
+	n2.valoare as "Nota student 2",
+	c.titlu_curs as "Curs" 
+	FROM note n1 
+	JOIN note n2 ON n1.id_curs = n2.id_curs
+	JOIN studenti s1 ON s1.nr_matricol = n1.nr_matricol
+	JOIN studenti s2 ON s2.nr_matricol = n2.nr_matricol
+	JOIN cursuri c ON c.id_curs = n1.id_curs
+	WHERE n1.valoare > n2.valoare
