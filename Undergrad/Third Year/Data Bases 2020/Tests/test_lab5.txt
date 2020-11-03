@@ -1,0 +1,63 @@
+select s.nume, s.prenume from studenti s 
+join note n on s.nr_matricol = n.nr_matricol
+join cursuri c on n.id_curs = c.id_curs
+where c.titlu_curs = 'OOP'
+order by n.valoare desc;
+
+
+select p.nume, p.prenume, decode(p.grad_didactic, 'Prof', 'Profesor', 'Conf', 'Conferentiar', 'Lect', 'Lector'),
+c.titlu_curs from profesori p
+join didactic d on p.id_prof=d.id_prof
+join cursuri c on d.id_curs=c.id_curs;
+
+
+select p.nume, p.prenume from profesori p 
+join didactic d on p.id_prof = d.id_prof
+join cursuri c on d.id_curs = c.id_curs
+where c.titlu_curs='BD';
+
+
+select s.nume, s.prenume, n.valoare, c.titlu_curs from studenti s 
+join note n on n.nr_matricol = s.nr_matricol
+join cursuri c on c.id_curs = n.id_curs
+where c.titlu_curs = 'BD' or c.titlu_curs = 'OOP';
+
+
+select s.nume, nvl(n.valoare, 0), nvl(c.titlu_curs, '-') from studenti s
+left outer join note n on s.nr_matricol = n.nr_matricol
+left outer join cursuri c on c.id_curs = n.id_curs;
+
+
+(select p.nume, p.prenume, c.titlu_curs from 
+profesori p 
+full outer join didactic d on p.id_prof=d.id_prof
+full outer join cursuri c on d.id_curs=c.id_curs
+minus 
+select p.nume, p.prenume, c.titlu_curs from 
+profesori p 
+ left join didactic d on p.id_prof=d.id_prof
+left join cursuri c on d.id_curs=c.id_curs)
+union
+(select p.nume, p.prenume, c.titlu_curs from 
+profesori p 
+full outer join didactic d on p.id_prof=d.id_prof
+full outer join cursuri c on d.id_curs=c.id_curs
+minus 
+select p.nume, p.prenume, c.titlu_curs from 
+profesori p 
+ right join didactic d on p.id_prof=d.id_prof
+right join cursuri c on d.id_curs=c.id_curs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

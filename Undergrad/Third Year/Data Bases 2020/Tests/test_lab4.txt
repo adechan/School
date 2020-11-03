@@ -1,0 +1,34 @@
+select translate(prenume, 'aAl', 'Aa') from studenti 
+intersect 
+select translate(trim(prenume), 'aAl', 'Aa') from profesori;
+
+
+select trim(nume), trim(prenume) from profesori 
+where lower(substr(length(trim(prenume)) - 1, length(trim(prenume)))) like 'a';
+
+
+
+select decode(an, 1, bursa + 10 * bursa/ 100,  
+2, bursa + 20 * bursa /100, 3,  bursa + 30 * bursa /100)
+ as "Bursa noua" from studenti;
+
+ 
+ 
+ select months_between(round (to_date ('27-OCT-16','DD-MON-YY'),'YEAR')"round (sysdate,'YEAR'))
+
+ 
+ select months_between(sysdate, to_date('01-01-2020')), 
+ months_between(sysdate, to_date('01-01-2020'))/12 from dual;
+ 
+ 
+ 
+ select initcap(nume), initcap(prenume), floor(months_between(sysdate, data_nastere) / 12),
+ to_char(data_nastere, 'Day', 'NLS_DATE_LANGUAGE=romanian') from studenti
+ order by to_char(data_nastere, 'd') asc;
+ 
+ 
+ 
+ 
+ select nr_matricol, id_curs, valoare, to_char(data_notare, 'day', 'NLS_DATE_LANGUAGE=romanian')
+ from note
+ where to_char(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english') like 'Friday';
