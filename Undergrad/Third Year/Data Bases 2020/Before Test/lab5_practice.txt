@@ -1,0 +1,61 @@
+1. Să se afișeze numele și prenumele studenților bursieri care au măcar o restanță.
+
+SELECT s.nume, s.prenume, s.bursa, n.valoare, c.titlu_curs 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE n.valoare < 5 AND bursa IS NOT NULL;
+
+2. Studentii din anul 3 trebuie sa isi aleaga indrumatori de licenta. Totusi, conditia ca 
+un profesor sa ii fie indrumator unui student este ca studentul sa aiba nota 10 la 
+cel putin una din materiile predate de catre profesor. Afisati posibilele colaboratori 
+dintre studenti si profesori in formatul "Studentul <nume> <prenume> poate avea ca 
+indrumator de licenta pe <grad> <nume> <prenume>"
+
+SELECT 'Studentul ' || s.nume || ' ' || s.prenume || ' poate avea ca indrumator de licenta pe ' || p.grad_didactic || ' ' || TRIM(p.nume) || ' ' || 
+TRIM(p.prenume) || '.' as "Indrumatori de licenta"
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+JOIN didactic d ON c.id_curs = d.id_curs
+JOIN profesori p ON p.id_prof = d.id_prof
+WHERE s.an = 3 AND n.valoare = 10;
+
+3. Sa se afiseze studentii care au luat nota 7 sau nota 10 la OOP intr-o zi de marti.
+
+SELECT s.nume, s.prenume, n.valoare, c.titlu_curs, 
+TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english')
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE (n.valoare = 7 OR n.valoare = 10) AND c.titlu_curs = 'OOP'
+AND TRIM(TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english')) = 'Tuesday';
+
+4. Pentru fiecare student afișați numele, prenumele, numărul de credite obținute la
+fiecare disciplină unde a fost evaluat precum și titlurile disciplinei. Vor 
+fi afișați și studenții care nu au fost evaluați la nicio disciplină, creditele
+asociate acestora fiind 0.
+ 
+SELECT s.nume, s.prenume, NVL(n.valoare, 0), NVL(c.credite, 0), NVL(c.titlu_curs, '-')
+FROM studenti s 
+LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
+LEFT JOIN cursuri c ON c.id_curs = n.id_curs;
+
+5. Afisati studentii si expresia "este restantier" sau "nu este restantier" in randul 
+fiecarui student
+
+SELECT s.nume || ' ' || s.prenume || DECODE(n.valoare, '5', ' NU ', '6', ' NU ', '7', ' NU ', '8', ' NU ', '9', ' NU ', '10', ' NU ', ' ') || 'este restantier la materia ' || c.titlu_curs as "Restantieri sau nu" 
+FROM studenti s 
+LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
+LEFT JOIN cursuri c ON c.id_curs = n.id_curs;
+
+6. Pentru fiecare curs, va fi afisat titlul cursului impreuna cu numarul de
+profesori care predau cursul in formatul urmator: daca nu este niciun 
+titular de curs este afisat 0, daca este exact un titular, va fi afisata 
+valoarea 1, iar daca sunt minim 2 titulari, va fi afisat textul '2+'. 
+Cursurile vor fi afisate o singura data.
+
+SELECT c.titlu_curs, decode(d1.id_curs, '', 0, decode(d2.id_curs, '', 1, 2)) as "Nr. titulari"
+FROM cursuri c 
+LEFT JOIN didactic d1 ON c.id_curs = d1.id_curs
+LEFT JOIN didactic d2 ON c.id_curs = d2.id_curs AND d1.id_prof != d2.id_prof;
