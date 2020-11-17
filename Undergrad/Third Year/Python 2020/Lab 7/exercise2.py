@@ -2,8 +2,6 @@
 # of them is more time-efficient.
 
 import time
-import math
-
 
 def isPrime1(number):
     count = 0
