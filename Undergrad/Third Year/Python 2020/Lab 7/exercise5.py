@@ -3,10 +3,12 @@
 # the extension ext to a zip archive named the.zip.
 
 import os
+import zipfile
 
 def function5(a_path, ext):
 
-    files = []
+    files_found = []
+    zip = zipfile.ZipFile("the.zip", "w", zipfile.ZIP_DEFLATED)
 
     for current_root, directories, files in os.walk(a_path):
         for file in files:
@@ -14,10 +16,17 @@ def function5(a_path, ext):
             extension = os.path.splitext(file_path)[1]
 
             if extension == ext:
-                files.append(file_path)
+                files_found.append(file_path)
 
-    return files
+    for file in files_found:
+        print(file)
+        # write file under the name basename(file)
+        zip.write(file, os.path.basename(file))
+
+    zip.close()
+
+    return files_found
 
 
-print(function5("C:\\Users\\Andreea Rindasu\\PycharmProjects\\PythonClass\\Lab 7\\Exercise3", ".txt"))
+print(function5("C:\\Users\\Andreea Rindasu\\PycharmProjects\\PythonClass\\Lab 7", ".txt"))
 
