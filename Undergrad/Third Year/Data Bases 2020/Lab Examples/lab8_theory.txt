@@ -1,0 +1,87 @@
+# Gruparea inregistrarilor 
+# Aplicarea functiilor de agregare 
+
+1. FUNCTII DE AGREGARE: 
+-> returneaza o singura linie rezultat pe baza unui grup de linii
+-> utilizat in SELECT, ORDER BY, HAVING
+-> NU este utilizat in WHERE
+
+-> DISTINCT: ia in considerare doar valorile distincte 
+-> ALL: functia calculeaza rezultatul pe baza tuturor valorilor
+
+#1 COUNT: returneaza numarul de linii
+   -> arg *: se numara si valorile NULL, altfel doar valorile nenule
+   
+SELECT COUNT(*) AS "Total studenti" FROM studenti; -> 13
+SELECT COUNT(NVL(bursa,0)) AS "Total studenti" FROM studenti; -> 13
+SELECT COUNT(bursa) AS "Studenti bursieri" FROM studenti; -> 5
+SELECT COUNT(DISTINCT bursa) AS "Variante bursa" FROM studenti; -> 3
+
+#2 AVG: returneaza media valorilor 
+SELECT AVG(valoare) FROM note;
+
+#3 MAX: returneaza valoarea maxima
+SELECT MAX(bursa) FROM studenti;
+
+#4 MIN: returneaza valoarea minima
+SELECT MIN(bursa) FROM studenti;
+
+#5 STDDEV: returneaza deviatia standard a valorilor
+SELECT STDDEV(bursa) AS "Deviatie standard" FROM studenti;
+
+#6 VARIANCE: returneaza varianta valorilor
+SELECT VARIANCE(bursa) AS "Varianta" FROM studenti;
+
+#7 SUM: returneaza suma valorilor
+SELECT SUM(bursa) FROM studenti;
+
+2. GRUPAREA DATELOR:
+-> utilizat cu GROUP BY (specifica impartirea liniilor tabelului interogat in 
+mai multe grupuri)
+-> se aplica functii de agregare pentru fiecare group -> linie pentru fiecare group
+
+# valoarea maxima pentru fiecare nr_matricol
+SELECT MAX(valoare) 
+    FROM note
+    GROUP BY nr_matricol;
+	
+# selecteaza an, (cate cursuri s-au gasit pentru fiecare an)
+SELECT an, count(*)
+    FROM cursuri
+    GROUP BY an;	
+	
+# selecteaza creditele, (cate cursuri s-au gasit pentru fiecare credit)	
+SELECT credite, count(*)
+    FROM cursuri
+    GROUP BY credite;	
+	
+# selecteaza an, credite, (cate cursuri s-au gasit pentru fiecare an & credit)
+SELECT an, credite, count(*)
+    FROM cursuri
+    GROUP BY an, credite
+    ORDER BY an, credite;	
+
+3. FILTRAREA GRUPURILOR 
+-> WHERE: elimina liniile individuale inainte de a avea loc gruparea
+-> HAVING: doar cu GROUP BY, pentru a elimina unele grupuri pe baza 
+rezultatului functiilor de agregare si nu a valorilor individuale
+
+# selecteaza id_curs, (cate note s-au gasit pentru fiecare curs)
+SELECT id_curs, COUNT(valoare)
+   FROM note
+   GROUP BY id_curs;
+
+# selecteaza id_curs, (cate valori s-au gasit > 8 pentru fiecare curs)
+# WHERE: se elimina liniile inainte de a face GROUP BY
+SELECT id_curs, COUNT(valoare)
+   FROM note
+   WHERE valoare>8
+   GROUP BY id_curs;
+   
+# selecteaza id_curs, (cate note s-au gasit pentru fiecare curs) -> 
+dar se returneaza doar liniile care au cel putin 8 note
+# HAVING: se elimina liniile dupa ce se face GROUP BY
+SELECT id_curs, COUNT(valoare)
+   FROM note
+   GROUP BY id_curs
+   HAVING COUNT(valoare)>8;
