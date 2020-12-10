@@ -1,0 +1,108 @@
+#1
+SELECT nume, prenume
+FROM studenti 
+WHERE bursa = (
+SELECT MAX(bursa) 
+FROM studenti
+);
+
+#2
+SELECT nume, prenume
+FROM studenti 
+WHERE (an, grupa) IN (
+SELECT an, grupa FROM studenti 
+WHERE nume LIKE 'Arhire'
+)
+AND nume NOT LIKE 'Arhire';
+
+#3
+-- cea mai mica nota din fiecare grupa/an
+SELECT s.grupa, s.an, MIN(n.valoare) 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY grupa, s.an;
+
+SELECT s.an, s.grupa, s.nume
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE (s.grupa, s.an, n.valoare) IN (
+SELECT s.grupa, s.an, MIN(n.valoare) 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.grupa, s.an
+)
+GROUP BY grupa, s.an, s.nume
+ORDER BY s.an ASC, s.grupa ASC;
+
+#4
+-- media tuturor notelor
+SELECT AVG(valoare) FROM note;
+
+SELECT s.nume, s.prenume, AVG(n.valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+HAVING AVG(n.valoare) > (
+SELECT AVG(valoare) FROM note
+)
+GROUP BY s.nume, s.prenume;
+
+#5
+-- media tuturor studentilor ordonati descrescator dupa medie
+SELECT nr_matricol, AVG(valoare)
+FROM note 
+GROUP BY nr_matricol
+ORDER BY 2 DESC;
+
+-- numele si media tuturor studentilor
+
+SELECT nr_matricol, nume, prenume, medie FROM (
+SELECT ROWNUM AS rn, nr_matricol, nume, prenume, medie FROM (
+SELECT s.nr_matricol, s.nume, s.prenume, AVG(n.valoare) AS medie
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume, s.prenume
+ORDER BY 4 DESC ) )
+WHERE rn < 4;
+
+#6 
+SELECT s.nume, s.prenume, AVG(n.valoare) FROM 
+studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+HAVING AVG(n.valoare) = ( -- studenti cu avg(valoare) = cea mai mare medie
+SELECT medie FROM ( -- media pentru rownum 1 (adica cea mai mare medie)
+SELECT ROWNUM as rn, nr_matricol, nume, prenume, medie FROM ( -- toti studentii cu media sa in ordine desc + rownum
+SELECT s.nr_matricol, s.nume, s.prenume, AVG(n.valoare) as medie -- toti studentii cu media sa in ordine desc
+FROM note n
+JOIN studenti s ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume, s.prenume
+ORDER BY medie DESC))
+WHERE rn = 1)
+
+#7
+SELECT s.nume, s.prenume, n.valoare
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE (n.valoare, c.titlu_curs) = (
+SELECT n.valoare, c.titlu_curs 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol 
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE c.titlu_curs = 'Logica' 
+AND s.nume = 'Ciobotariu' AND s.prenume = 'Ciprian'
+)
+AND s.nume <> 'Ciobotariu' AND s.prenume <> 'Ciprian';
+
+#8
+SELECT prenume 
+FROM ( SELECT rownum AS rn, prenume 
+FROM ( SELECT * FROM studenti ORDER BY prenume)
+)
+WHERE rn = 5;
+
+#9
+
+#10
+
+

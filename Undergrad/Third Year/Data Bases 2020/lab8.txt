@@ -1,99 +1,106 @@
 #1
 SELECT an, COUNT(*)
-FROM studenti 
+FROM studenti
 GROUP BY an;
 
 #2
 SELECT an, grupa, COUNT(*)
-FROM studenti 
+FROM studenti
 GROUP BY an, grupa
 ORDER BY an ASC, grupa ASC;
 
 #3
-SELECT an, grupa, COUNT(*)
+SELECT an, grupa, COUNT(*) AS "Numar de studenti", COUNT(bursa) AS "Numar de bursieri"
 FROM studenti
-WHERE bursa IS NOT NULL
-GROUP BY an, grupa;
+GROUP BY an, grupa, bursa
+ORDER BY an, grupa;
 
 #4
-SELECT SUM(bursa) FROM studenti;
+SELECT SUM(bursa) 
+FROM studenti;
 
-#5 (??)
-SELECT AVG(NVL(bursa, 0)) FROM studenti; 
+#5
+SELECT AVG(NVL(bursa, 0))
+FROM studenti;
 
 #6
-SELECT valoare, COUNT(*) 
+SELECT valoare, COUNT(valoare) AS "Cate note"
 FROM note
 GROUP BY valoare
-ORDER BY valoare desc;
+ORDER BY valoare DESC;
 
 #7
-SELECT TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'), COUNT(valoare)
+SELECT TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'),
+COUNT(*) AS "NUMAR DE NOTE"
 FROM note
 GROUP BY TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english')
-ORDER BY 2 desc;
+ORDER BY 2 DESC;
 
 #8
-SELECT TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'), COUNT(valoare)
+SELECT TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'),
+COUNT(*) AS "NUMAR DE NOTE"
 FROM note
-GROUP BY TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'), TO_CHAR(data_notare, 'D', 'NLS_DATE_LANGUAGE=english')
-ORDER BY TO_CHAR(data_notare, 'D', 'NLS_DATE_LANGUAGE=english') ASC;
+GROUP BY TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'),
+TO_CHAR(data_notare, 'd', 'NLS_DATE_LANGUAGE=english')
+ORDER BY TO_CHAR(data_notare, 'd', 'NLS_DATE_LANGUAGE=english')
 
 #9
-SELECT s.nr_matricol, s.nume, s.prenume, AVG(n.valoare)
-FROM studenti s 
+SELECT s.nume, s.prenume, AVG(n.valoare)
+FROM studenti s
 JOIN note n ON s.nr_matricol = n.nr_matricol
 GROUP BY s.nr_matricol, s.nume, s.prenume
-ORDER BY 4 DESC;
+ORDER BY 3 DESC;
 
-#10 (??)
-SELECT s.nr_matricol, s.nume, s.prenume, AVG(n.valoare)
-FROM studenti s 
+#10
+SELECT s.nume, s.prenume, NVL(AVG(n.valoare), NULL)
+FROM studenti s
 LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
 GROUP BY s.nr_matricol, s.nume, s.prenume
-ORDER BY 4 DESC;
+ORDER BY 3 DESC;
 
 #11
-SELECT s.nr_matricol, s.nume, s.prenume, NVL(AVG(n.valoare), 0)
-FROM studenti s 
+SELECT s.nume, s.prenume, NVL(AVG(n.valoare), 0)
+FROM studenti s
 LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
 GROUP BY s.nr_matricol, s.nume, s.prenume
-ORDER BY 4 DESC;
+ORDER BY 3 DESC;
 
 #12
-SELECT s.nr_matricol, s.nume, s.prenume, NVL(AVG(n.valoare), 0)
-FROM studenti s 
+SELECT s.nume, s.prenume, NVL(AVG(n.valoare), 0)
+FROM studenti s
 LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
 GROUP BY s.nr_matricol, s.nume, s.prenume
 HAVING NVL(AVG(n.valoare), 0) >= 8
-ORDER BY 4 DESC;
+ORDER BY 3 DESC;
 
-#13 (!??)
-SELECT s.nr_matricol, MAX(n.valoare), MIN(n.valoare), AVG(n.valoare)
-FROM studenti s 
-JOIN note n ON s.nr_matricol = n.nr_matricol AND n.valoare >= 7
-GROUP BY s.nr_matricol
-MINUS
-SELECT s.nr_matricol, MAX(n.valoare), MIN(n.valoare), AVG(n.valoare)
-FROM studenti s 
-JOIN note n ON s.nr_matricol = n.nr_matricol AND n.valoare < 7
-GROUP BY s.nr_matricol;
-
-#14
-
-
-#15
-SELECT s.nume, s.prenume, AVG(n.valoare)
+#13
+SELECT s.nume, MAX(n.valoare), MIN(n.valoare), AVG(n.valoare)
 FROM studenti s 
 JOIN note n ON s.nr_matricol = n.nr_matricol
-WHERE s.an = 3 AND s.grupa = 'A2'
-GROUP BY s.nume, s.prenume;
+GROUP BY s.nr_matricol, s.nume
+HAVING MIN(n.valoare) >= 7;
+
+#14
+SELECT s.nume, AVG(n.valoare) 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume
+HAVING COUNT(n.valoare) >= 4;
+
+#15
+SELECT s.nume, AVG(n.valoare)
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE grupa = 'A2' AND an = 3
+GROUP BY s.nume, s.nr_matricol;
 
 #16
-
+SELECT MAX(AVG(valoare))
+FROM note
+GROUP BY nr_matricol;
 
 #17
-SELECT c.titlu_curs, NVL(MIN(n.valoare), 0), NVL(MAX(n.valoare), 0)
+SELECT c.titlu_curs, MIN(n.valoare), MAX(n.valoare)
 FROM cursuri c 
-LEFT JOIN note n ON c.id_curs = n.id_curs
+JOIN note n ON c.id_curs = n.id_curs
 GROUP BY c.titlu_curs;
