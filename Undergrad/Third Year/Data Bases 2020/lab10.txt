@@ -1,0 +1,130 @@
+#1
+SELECT nume, prenume, an, data_nastere
+FROM studenti s1 
+WHERE EXISTS (
+SELECT *
+FROM studenti s2
+WHERE s1.an = s2.an AND s1.nr_matricol <> s2.nr_matricol AND 
+s1.data_nastere < s2.data_nastere
+)
+
+#2 (???)
+SELECT s.nume, s.prenume, AVG(n.valoare), s.an
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.an
+HAVING AVG(n.valoare) > (
+SELECT AVG(n2.valoare) 
+FROM studenti s2
+JOIN note n2 ON s2.nr_matricol = n2.nr_matricol
+WHERE s.an = s2.an
+)
+
+#3 
+SELECT s1.nume, s1.prenume, s1.an, s1.grupa 
+FROM studenti s1
+JOIN note n1 ON s1.nr_matricol = n1.nr_matricol
+GROUP BY s1.nr_matricol, s1.nume, s1.prenume, s1.an, s1.grupa
+HAVING AVG(valoare) = (
+SELECT MAX(AVG(n2.valoare))
+FROM studenti s2
+JOIN note n2 ON s2.nr_matricol = n2.nr_matricol 
+WHERE s2.an = s1.an AND s2.grupa = s1.grupa 
+GROUP BY s2.nr_matricol
+)
+
+#4 (?)
+SELECT DISTINCT s1.nr_matricol, s1.nume, s1.prenume
+FROM studenti s1 
+JOIN note n1 ON s1.nr_matricol = n1.nr_matricol
+WHERE n1.valoare IN (
+SELECT n2.valoare 
+FROM studenti s2
+JOIN note n2 ON s2.nr_matricol = n2.nr_matricol
+WHERE n1.nr_matricol <> n2.nr_matricol AND s1.an = s2.an 
+)
+
+#5
+-- studenti care nu au colegi de grupa
+SELECT s1.nr_matricol
+FROM studenti s1 
+WHERE s1.nr_matricol NOT IN (
+SELECT DISTINCT s2.nr_matricol 
+FROM studenti s2 
+JOIN studenti s3 ON s2.grupa = s3.grupa AND s2.an = s3.an
+WHERE s2.nr_matricol != s3.nr_matricol
+);
+
+-- studenti care au colegi 
+SELECT DISTINCT s2.nr_matricol 
+FROM studenti s2 
+JOIN studenti s3 ON s2.grupa = s3.grupa AND s2.an = s3.an
+WHERE s2.nr_matricol != s3.nr_matricol;
+
+#6
+SELECT p1.nume, p1.prenume, AVG(n1.valoare) as "Medie"
+FROM profesori p1
+JOIN didactic d1 ON p1.id_prof = d1.id_prof
+JOIN note n1 ON d1.id_curs = n1.id_curs
+GROUP BY p1.nume, p1.prenume, p1.id_prof
+HAVING AVG(n1.valoare) IN (
+SELECT AVG(n2.valoare)
+FROM profesori p2
+JOIN didactic d2 ON p2.id_prof = d2.id_prof
+JOIN note n2 ON d2.id_curs = n2.id_curs
+WHERE p1.id_prof <> p2.id_prof
+GROUP BY p2.nume, p2.prenume, p2.id_prof
+HAVING AVG(n1.valoare) = AVG(n2.valoare)
+)
+ORDER BY AVG(n1.valoare);
+
+#7
+
+#8
+-- max nr de credite din fiecare an
+SELECT an, MAX(credite)
+FROM cursuri
+GROUP BY an;
+
+-- Subinterogare corelata
+-> subinterogarea este evaluata pentru fiecare rand
+-> din interogarea principala
+SELECT an, titlu_curs, credite
+FROM cursuri c1
+WHERE credite = (
+SELECT MAX(credite)
+FROM cursuri c2
+GROUP BY an
+HAVING c1.an = c2.an
+)
+ORDER BY an ASC;
+
+-- Subinterogare necorelata
+-> subinterogarea se executa o singura data, inaintea
+-> interogarii exterioare, cea din urma utilizand rezultatul
+-> subinterogarii pentru a filtra
+SELECT an, titlu_curs, credite
+FROM cursuri
+WHERE (an, credite) IN (
+SELECT an, MAX(credite)
+FROM cursuri
+GROUP BY an
+)
+ORDER BY an ASC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
