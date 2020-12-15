@@ -1,0 +1,195 @@
+& - variabila de substitutie (ex: &variabila)
+
+spool "d:/director nou/laborator11.txt"
+-> dupa ce termini toate comenzile -> spool off (afiseaza interogari, raspunsuri)
+
+Comenzi DML
+(de modificare a datelor din tabele)
+- insert
+- update
+- delete
+- select
+
+Secvente: pentru a genera valori auto incrementate
+-> este un obiect
+CREATE SEQUENCE nume
+
+describe all_objects;
+select object_name from all_objects where object_type='SEQUENCE'
+and OWNER='STUDENT';
+drop sequence s1
+
+CREATE SEQUENCE s1
+  INCREMENT BY 2
+  START WITH 10
+  MAXVALUE 100;
+
+select s1.nextval from studenti;
+ 
+
+ex1:
+CREATE SEQUENCE ex1_curs
+  INCREMENT BY 1
+  START WITH 10
+  MAXVALUE 100;
+  
+select * from cursuri;
+
+insert into cursuri values(ex1_curs.nextval, 'curs1', 3, 2, 5);
+insert into cursuri values(ex1_curs.nextval, 'curs2', 3, 2, 5);
+insert into cursuri values(ex1_curs.nextval, 'curs3', 3, 2, 5);
+
+rollback;
+drop sequence ex1_curs;
+
+===========================================================
+Actualizarea inregistrarilor
+
+UPDATE studenti
+SET bursa=bursa*0.15 WHERE bursa<300;
+
+ex2:
+1. actualizarea bursei pentru studentii care au macar o nota de 10
+vor primi 500 ron
+
+
+-- stud care au cel putin o nota de 10: NECORELAT
+select distinct nr_matricol 
+from note
+where valoare = 10;
+
+UPDATE studenti
+SET bursa=500 WHERE nr_matricol IN (
+select distinct nr_matricol 
+from note
+where valoare = 10
+);
+
+select * from studenti;
+
+2. toti studentii primesc o bursa egala 100* media notelor lor
+
+-- media stud: CORELAT
+select avg(valoare)
+from note
+group by nr_matricol;
+
+update studenti s1 --- alias pentru subselect corelat
+set bursa = 100 * (
+select avg(valoare)
+from note n1
+where s1.nr_matricol = n1.nr_matricol
+group by nr_matricol
+);
+
+=====================================================
+Stergere
+
+ex:
+delete from studenti 
+where nr_matricol not in (
+select distinct nr_matricol from note);
+
+Comenzi DDL: pentru tabele
+- se comporta ca un commit
+
+CREATE TABLE nume AS...
+
+-> tranzactia se finalizeaza cand dai o comanda DDL
+-> daca dai delete, rollback nu o sa functioneze
+ 
+ex:Creati apoi o tabelă care să stocheze numele,
+ prenumele, bursa si mediile studentilor.
+ 
+select s.nume, s.prenume, s.bursa, avg(n.valoare) as media 
+from studenti s
+join note n on s.nr_matricol = n.nr_matricol
+group by s.nr_matricol, s.nume, s.prenume, s.bursa;
+
+create table medii_1 as 
+select s.nume, s.prenume, s.bursa, avg(n.valoare) as media 
+from studenti s
+join note n on s.nr_matricol = n.nr_matricol
+group by s.nr_matricol, s.nume, s.prenume, s.bursa;
+
+drop table medii_1;
+===========================================================
+
+ALTER TABLE
+
+ALTER TABLE cursuri ADD (abreviere CHAR(2) NULL, 
+                 descriere VARCHAR(40) DEFAULT 'curs obligatoriu');
+
+describe cursuri;
+select * from cursuri;
+
+ALTER TABLE cursuri DROP COLUMN descriere;
+describe cursuri;
+select * from cursuri;
+
+ex.
+1.
+delete from profesori where id_prof='p20' or id_prof='p21';
+ALTER TABLE profesori ADD CONSTRAINT 
+     pk_profs PRIMARY KEY (id_prof);
+	 
+ALTER TABLE cursuri ADD CONSTRAINT 
+     pk_curs PRIMARY KEY (id_curs);
+
+2. 
+-- chei straine --- doar la CHEI PRIMARE/ CANDIDAT
+note, didactic - tabele dependente
+const. referentiale -> cheie straine 
+
+la stergere din profesori -> id_prof din didactic devine NULL
+ALTER TABLE didactic ADD CONSTRAINT 
+     fk_did1 FOREIGN KEY (id_prof) 
+           REFERENCES profesori(id_prof) ON DELETE SET NULL;
+
+
+delete from profesori where id_prof='p1';
+select * from didactic;
+rollback;
+
+la stergere din cursuri -> id_curs din didactic se sterge
+ALTER TABLE didactic ADD CONSTRAINT 
+     fk_did2 FOREIGN KEY (id_curs) 
+           REFERENCES cursuri(id_curs) ON DELETE CASCADE;
+		   
+delete from cursuri where id_curs=21;
+select * from didactic;
+
+3. 
+pe tabela NOTE const de tipul UNIQUE (pt chei candidat)
+
+4.
+pe NOTE  const de tipul CHECK valoare between 1 and 10
+===========================================================
+
+Tranzactii
+
+- importante in baze de date relationale
+- nu putem avea bd care nu suporta tranzactii
+- tranzactii = ACID
+A: tranzactie = un set de comenzi DML, sau o comanda DDL -- ori se executa toate ori nniciuna
+I: nu ar trebui sa interfere cu alti users
+C: datele trebuie sa fie consistente, nu poti pierde date (verifici daca produsul e pe stoc.. etc)
+D: 
+
+- se incheie cand dai rollback (finalizezi tranz. si te intorci la starea de dinainte), 
+commit (tranz cu succes), cand e intalnita prima comanda de DDL, sau
+dai disconnect, sau e eroare de sistem (se comporta ca un rollback)
+
+- incepe imediat ce se incheie o tranz.
+
+- prima comanda DML = inceputul unei noi tranzactii
+
+- savepoint -> rollback te duce la savepoint
+
+
+ALTER TABLE profesori DROP CONSTRAINT pk_profs;
+ALTER TABLE didactic DROP CONSTRAINT fk_did1;
+ALTER TABLE didactic DROP CONSTRAINT fk_did2;
+
+
+
