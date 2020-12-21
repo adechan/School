@@ -1,0 +1,854 @@
+-- Recapitulare -- WEEK 12
+===================================================================================
+WEEK 2: exercitii
+===================================================================================
+#1.
+SELECT nume, prenume, an, data_nastere 
+FROM studenti;
+SAVE "C:\Users\Andreea Rindasu\Desktop\p1.sql";
+
+#2.
+SELECT DISTINCT bursa 
+FROM studenti;
+
+#3. 
+GET "C:\Users\Andreea Rindasu\Desktop\p1.sql";
+EDIT
+SELECT nume as "Nume", prenume as "Prenume", an as "An", data_nastere as "Data nastere"
+FROM studenti;
+
+#4. 
+SELECT nume || prenume || ', ' || an as "Studenti pe ani de studiu"
+FROM studenti
+ORDER BY an ASC;
+
+#5
+SELECT nume, prenume, data_nastere 
+FROM studenti
+WHERE data_nastere BETWEEN '01-01-1995' AND '10-06-1997'
+ORDER BY an DESC;
+
+#6
+SELECT nume, prenume, an, data_nastere
+FROM studenti 
+WHERE data_nastere LIKE '%1995';
+
+#7
+SELECT * FROM studenti
+WHERE bursa IS NULL;
+
+#8
+SELECT nume, prenume, an
+FROM studenti
+WHERE bursa IS NOT NULL AND an IN (2,3)
+ORDER BY nume ASC, prenume DESC;
+
+#9
+SELECT nume, prenume, bursa + bursa * 15 / 100 as "Bursa marita"
+FROM studenti
+WHERE bursa IS NOT NULL;
+
+#10
+SELECT nume, an 
+FROM studenti
+WHERE upper(nume) LIKE 'P%' AND an = 1;
+
+#11
+SELECT * 
+FROM studenti 
+WHERE prenume LIKE 'A%a%' OR prenume LIKE '%a%a%';
+
+#12
+SELECT * 
+FROM studenti
+WHERE INITCAP(prenume) IN ('Alexandru', 'Ioana', 'Marius');
+
+#13 
+SELECT *
+FROM studenti
+WHERE bursa IS NOT NULL AND grupa LIKE 'A%';
+
+#14
+SELECT nume, prenume 
+FROM profesori 
+WHERE TRIM(prenume) LIKE '%n';
+
+===================================================================================
+WEEK 3: exercitii
+===================================================================================
+#1
+SELECT CURRENT_DATE AS "Astazi" FROM DUAL;
+
+#2
+SELECT nume, prenume, data_nastere, MONTHS_BETWEEN(CURRENT_DATE, data_nastere)
+FROM studenti;
+
+#3
+SELECT TO_CHAR(data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') 
+FROM studenti;
+
+#4
+SELECT CONCAT('Elevul ', (CONCAT(prenume, CONCAT('este in grupa ', grupa))))
+FROM studenti;
+
+#5
+SELECT RPAD(bursa, 10, '$') as "Bursa"
+FROM studenti;
+
+#6
+SELECT LOWER(SUBSTR(TRIM(nume), 1, 1)) || UPPER(SUBSTR(TRIM(nume), 2, LENGTH(TRIM(nume)))) as "Nume",
+LENGTH(TRIM(nume)) 
+FROM profesori;
+
+===================================================================================
+WEEK 8: exercitii
+===================================================================================
+#1
+SELECT an, COUNT(*) as "Numar studenti"
+FROM studenti
+GROUP BY an;
+
+#2
+SELECT an, grupa, COUNT(*)
+FROM studenti
+GROUP BY grupa, an
+ORDER BY an ASC, grupa ASC;
+
+#3
+SELECT an, grupa, COUNT(*), COUNT(bursa)
+FROM studenti
+GROUP BY an, grupa
+ORDER BY an ASC, grupa ASC;
+
+#4
+SELECT SUM(bursa)
+FROM studenti;
+
+#5
+SELECT AVG(NVL(bursa, 0)) FROM studenti;
+
+#6
+SELECT valoare, COUNT(valoare)
+FROM note
+GROUP BY valoare
+ORDER BY valoare DESC;
+
+#7
+SELECT TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'), COUNT(valoare)
+FROM note
+GROUP BY TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english') 
+ORDER BY 2 DESC;
+
+#8
+SELECT TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'), COUNT(valoare)
+FROM note
+GROUP BY TO_CHAR(data_notare, 'Day', 'NLS_DATE_LANGUAGE=english'), TO_CHAR(data_notare, 'D', 'NLS_DATE_LANGUAGE=english') 
+ORDER BY TO_CHAR(data_notare, 'D', 'NLS_DATE_LANGUAGE=english') ASC;
+
+#9
+SELECT s.nume, s.prenume, AVG(n.valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+ORDER BY 3 DESC;
+
+#10
+SELECT s.nume, s.prenume, AVG(NVL(n.valoare, NULL))
+FROM studenti s 
+LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+ORDER BY 3 DESC;
+
+#11
+SELECT s.nume, s.prenume, AVG(NVL(n.valoare, 0))
+FROM studenti s 
+LEFT JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+ORDER BY 3 DESC;
+
+#12
+SELECT s.nume, s.prenume, AVG(n.valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume, s.prenume
+HAVING AVG(n.valoare) >= 8
+ORDER BY 3 DESC;
+
+#13
+SELECT s.nume, s.prenume, MAX(valoare), MIN(valoare), AVG(valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+HAVING MIN(valoare) >= 7;
+
+#14
+SELECT s.nume, s.prenume, AVG(n.valoare), COUNT(valoare) as "Nr. note" 
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume, s.prenume
+HAVING COUNT(valoare) >= 4;
+
+#15
+SELECT s.nume, s.prenume, AVG(n.valoare) 
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE an = 3 AND grupa LIKE 'A2'
+GROUP BY s.nume, s.prenume, s.nr_matricol, s.an, s.grupa;
+
+SELECT s.nume, s.prenume, AVG(n.valoare) 
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol, s.an, s.grupa
+HAVING an = 3 AND grupa LIKE 'A2';
+
+#16
+SELECT MAX(AVG(valoare))
+FROM note
+GROUP BY nr_matricol;
+
+#17
+SELECT c.titlu_curs, MIN(n.valoare), MAX(n.valoare)
+FROM cursuri c
+JOIN note n ON c.id_curs = n.id_curs
+GROUP BY c.titlu_curs, c.id_curs;
+
+===================================================================================
+WEEK 9: exercitii
+===================================================================================
+#1
+SELECT nume, prenume
+FROM studenti
+WHERE bursa = (
+SELECT MAX(bursa)
+FROM studenti)
+GROUP BY nume, prenume, nr_matricol;
+
+#2
+-- an, grupa a lui Arhire
+SELECT an, grupa FROM studenti 
+WHERE nume LIKE 'Arhire';
+
+-- studenti care sunt in grupa, an cu Arhire
+SELECT nume, prenume
+FROM studenti 
+WHERE (an, grupa) IN (
+SELECT an, grupa FROM studenti 
+WHERE nume LIKE 'Arhire'
+)
+AND nume NOT LIKE 'Arhire';
+
+#3 
+-- cea mai mica nota la nivelul grupei
+SELECT s.an, s.grupa, MIN(valoare)
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.an, s.grupa
+ORDER BY s.an ASC, s.grupa ASC;
+
+-- numele studenților care au obținut cea mai mică notă la nivelul grupei
+SELECT s.an, s.grupa, s.nume, s.prenume, valoare
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE (s.an, s.grupa, valoare) IN (
+SELECT s.an, s.grupa, MIN(valoare)
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.an, s.grupa
+)
+ORDER BY s.an ASC, s.grupa ASC
+
+#4
+-- media tuturor notelor din bd
+SELECT AVG(valoare) FROM note;
+
+-- studenții a căror medie este mai mare decât media tuturor notelor din baza de date
+SELECT s.nume, s.prenume, AVG(valoare)
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+HAVING AVG(valoare) > (
+SELECT AVG(valoare) FROM note
+);
+
+#5
+-- studenti ordonati desc dupa medie
+SELECT s.nume as nume, s.prenume as prenume, AVG(valoare) as medie
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+ORDER BY 3 DESC;
+
+-- primii 3 studenti ordonati dupa medie
+SELECT nume, prenume, medie FROM (
+SELECT rownum as rn, nume, prenume, medie FROM (
+SELECT s.nume as nume, s.prenume as prenume, AVG(valoare) as medie
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+ORDER BY 3 DESC))
+WHERE rn < 4;
+
+#6
+-- cea mai mare medie
+SELECT MAX(AVG(valoare))
+FROM note 
+GROUP BY nr_matricol;
+
+-- studenti cu cea mai mare medie
+SELECT s.nume, s.prenume, AVG(valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.nr_matricol
+HAVING AVG(valoare) = (
+SELECT MAX(AVG(valoare))
+FROM note 
+GROUP BY nr_matricol);
+
+#7
+-- nota lui Ciprian Ciobotariu la Logica
+SELECT n.valoare, c.titlu_curs
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE s.nume = 'Ciobotariu' AND s.prenume = 'Ciprian' AND c.titlu_curs = 'Logica';
+
+-- studenti care au aceeasi nota ca Ciprian Ciobotariu la Logica
+SELECT s.nume, s.prenume
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE (n.valoare, c.titlu_curs) = (
+SELECT n.valoare, c.titlu_curs
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE s.nume = 'Ciobotariu' AND s.prenume = 'Ciprian' AND c.titlu_curs = 'Logica'
+)
+AND s.nume <> 'Ciobotariu' AND s.prenume <> 'Ciprian';
+
+#8
+-- studenti in ordine alfabetica
+SELECT prenume 
+FROM studenti 
+ORDER BY prenume ASC;
+
+-- al cincilea prenume in ordine alfabetica
+SELECT prenume FROM (
+SELECT rownum as rn, prenume FROM (
+SELECT prenume 
+FROM studenti 
+ORDER BY prenume ASC))
+WHERE rn = 5;
+===================================================================================
+SUBINTEROGARI NECORELATE -- REDO -- 
+===================================================================================
+#1 numele studenților care iau cea mai mare bursa acordată.
+-- cea mai mare bursa acordata
+SELECT MAX(bursa)
+FROM studenti;
+
+-- selectam doar liniile care ne intereseaza
+-- adica cei care au bursa = 450
+-- studenti care iau cea mai mare bursa acordata 
+SELECT s.nume, s.prenume
+FROM studenti s 
+WHERE s.bursa = (
+SELECT MAX(bursa)
+FROM studenti
+);
+
+
+#2 numele studenților care sunt colegi cu un student pe nume Arhire
+-- grupa, an pentru studentul Arhire
+SELECT grupa, an FROM
+studenti
+WHERE nume = 'Arhire';
+
+SELECT nume, prenume, an, grupa
+FROM studenti
+WHERE (grupa, an) IN (
+SELECT grupa, an FROM
+studenti
+WHERE nume = 'Arhire'
+)
+AND nume <> 'Arhire';
+
+
+#3 Pentru fiecare grupă afișați numele studenților care au obținut 
+   cea mai mică notă la nivelul grupei.
+   
+-- cea mai mica nota la nivelul grupei
+SELECT s.an, s.grupa, MIN(n.valoare) 
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.an, s.grupa;
+
+-- filtram liniile folosind subinterogarea
+SELECT s.nume, s.prenume, s.an, s.grupa, n.valoare
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.grupa, s.an, s.nume, s.prenume, s.nr_matricol, n.valoare
+HAVING (s.an, s.grupa, MIN(valoare)) IN (
+SELECT s.an, s.grupa, MIN(n.valoare) 
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.an, s.grupa
+)
+ORDER BY s.an ASC, s.grupa ASC, n.valoare DESC;
+
+
+#4 studenții a căror medie este mai mare decât media tuturor notelor 
+   din baza de date. Afișați numele și media acestora.
+
+-- media tutoror notelor din bd
+SELECT AVG(valoare) FROM note;
+
+-- studenti care au media mai mare decat ^^
+SELECT s.nume, s.prenume, AVG(valoare)
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume, s.prenume
+HAVING AVG(valoare) >= (
+SELECT AVG(valoare) FROM note
+)
+ORDER BY 3 DESC;
+
+
+#5 numele și media primilor trei studenți ordonați descrescător după medie.
+
+SELECT nume, prenume, medie FROM (
+SELECT rownum as rn, nume, prenume, medie FROM(
+SELECT s.nume as nume, s.prenume as prenume, AVG(valoare) as medie
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nr_matricol, s.nume, s.prenume
+ORDER BY medie DESC ))
+WHERE rn < 4;
+
+
+#6 numele studentului (studenților) cu cea mai mare medie precum și valoarea mediei 
+
+-- cea mai mare medie dintre toti studentii
+SELECT nr_matricol, medie FROM (
+SELECT rownum as rn, nr_matricol, medie FROM (
+SELECT nr_matricol, AVG(valoare) as medie
+FROM note
+GROUP BY nr_matricol
+ORDER BY medie DESC ))
+WHERE rn = 1
+
+-- studenti care au cea mai mare medie
+SELECT s.nr_matricol, s.nume, s.prenume, AVG(valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol 
+GROUP BY s.nr_matricol, s.nume, s.prenume
+HAVING (s.nr_matricol, AVG(valoare)) IN (
+SELECT nr_matricol, medie FROM (
+SELECT rownum as rn, nr_matricol, medie FROM (
+SELECT nr_matricol, AVG(valoare) as medie
+FROM note
+GROUP BY nr_matricol
+ORDER BY medie DESC ))
+WHERE rn = 1
+);
+
+
+#7 numele şi prenumele tuturor studenţilor care au luat aceeaşi 
+   nota ca şi Ciprian Ciobotariu la materia Logică.
+   
+-- nota lui Ciprian Ciobotariu la materia logica
+SELECT n.valoare, c.titlu_curs 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c on c.id_curs = n.id_curs
+WHERE s.nume = 'Ciobotariu' AND s.prenume = 'Ciprian' AND c.titlu_curs = 'Logica';
+
+SELECT s.nume, s.prenume, n.valoare, c.titlu_curs 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE (n.valoare, c.titlu_curs) IN (
+SELECT n.valoare, c.titlu_curs 
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c on c.id_curs = n.id_curs
+WHERE s.nume = 'Ciobotariu' AND s.prenume = 'Ciprian' AND c.titlu_curs = 'Logica'
+)
+AND s.nume <> 'Ciobotariu' AND s.prenume <> 'Ciprian';
+
+  
+#8 al cincilea prenume (in ordine alfabetica)
+
+SELECT prenume FROM (
+SELECT rownum as rn, prenume FROM (
+SELECT prenume FROM studenti 
+ORDER BY prenume ASC))
+WHERE rn = 5;
+
+#9 Afișați cele mai frecvente două note. 
+   În caz de egalitate afișați notele mai mari.
+   
+-- notele si cat de frecvent au fost puse
+SELECT valoare, COUNT(valoare) as count
+FROM note
+GROUP BY valoare;
+
+-- cele mai frecvente 2 note
+-- daca frecventele sunt egale, ia valoarea mai mare
+SELECT valoare, count FROM (
+SELECT rownum as rn, valoare, count FROM (
+SELECT valoare, COUNT(valoare) as count
+FROM note
+GROUP BY valoare
+ORDER BY count DESC, valoare DESC))
+WHERE rn < 3;
+
+
+#10 Să se afișeze cei mai răi trei profesori. 
+Un profesor este mai rău dacă pune note mai mici
+(și deci are media notelor puse de el mai mică).
+Profesorii vor fi ordonați după răutate 
+(cel mai rău va fi primul în listă).
+
+-- medii puse de profesori
+SELECT p.nume as nume, p.prenume as prenume, AVG(n.valoare) as medie
+FROM note n
+JOIN didactic d ON n.id_curs = d.id_curs
+JOIN profesori p ON p.id_prof = d.id_prof
+GROUP BY p.id_prof, p.nume, p.prenume
+ORDER BY medie ASC;
+
+-- cei mai rai 3 profesori 
+SELECT nume, prenume, medie FROM (
+SELECT rownum as rn, nume, prenume, medie FROM (
+SELECT p.nume as nume, p.prenume as prenume, AVG(n.valoare) as medie
+FROM note n
+JOIN didactic d ON n.id_curs = d.id_curs
+JOIN profesori p ON p.id_prof = d.id_prof
+GROUP BY p.id_prof, p.nume, p.prenume
+ORDER BY medie ASC
+)) 
+WHERE rn < 4;
+
+
+#11 Afișați studenții care au note la cursul având cele mai multe note. 
+Se vor afișa numele, prenumele și nota la acel curs / acele cursuri 
+(în caz că sunt mai multe cu un același număr maxim de note).
+
+-- cursuri si cate note au fiecare
+SELECT n.id_curs, COUNT(n.valoare) as count
+FROM note n
+GROUP BY n.id_curs
+ORDER BY count DESC;
+
+-- cele mai multe note puse la un curs
+SELECT MAX(COUNT(valoare))
+FROM note 
+GROUP BY id_curs;
+
+-- cursuri care au cele mai multe note puse
+SELECT n.id_curs
+FROM note n
+GROUP BY n.id_curs
+HAVING COUNT(n.valoare) = (
+SELECT MAX(COUNT(valoare))
+FROM note 
+GROUP BY id_curs
+)
+
+-- studenti care au note la cursurile de mai sus
+SELECT s.nume, s.prenume, n.valoare, c.titlu_curs
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE c.id_curs IN (
+SELECT n.id_curs
+FROM note n
+GROUP BY n.id_curs
+HAVING COUNT(n.valoare) = (
+SELECT MAX(COUNT(valoare))
+FROM note 
+GROUP BY id_curs
+)
+)
+ORDER BY s.nume ASC, n.valoare DESC;
+
+
+#12 Să se afișeze câte note mai mari sau egale cu 5 are fiecare student.
+Se vor afișa numele, prenumele și numărul notelor mai mari decât 5 ale acelui student
+
+-- note mai mari sau egale cu 5 pentru fiecare student
+SELECT nr_matricol, COUNT(valoare)
+FROM note
+WHERE valoare >= 5
+GROUP BY nr_matricol
+
+SELECT s.nume, s.prenume, COUNT(n.valoare) as "Cate note >= 5"
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE n.valoare >= 5
+GROUP BY s.nr_matricol, s.nume, s.prenume;
+
+
+#13 Pentru fiecare student să se afișeze numărul de restanțieri 
+din grupă cu el. Dacă și el este restanțier, va fi inclus 
+în această numărătoare. Pentru ca un student să fie restanțier
+trebuie să aibă măcar o notă mai mică decât 5.
+
+-- studenti restantieri
+SELECT nr_matricol 
+FROM note
+WHERE valoare < 5;
+
+-- cati studenti restantieri sunt in fiecare grupa
+SELECT an, grupa, COUNT(DISTINCT nr_matricol) as restantieri 
+FROM studenti
+NATURAL JOIN note
+WHERE valoare < 5
+GROUP BY an, grupa;
+
+-- studenti restantieri din fiecare grupa
+SELECT s.nume, s.prenume, s.grupa, s.an, NVL(i.restantieri, 0)
+FROM studenti s 
+LEFT JOIN (
+SELECT an, grupa, COUNT(DISTINCT nr_matricol) as restantieri
+FROM studenti
+NATURAL JOIN note
+WHERE valoare < 5
+GROUP BY an, grupa
+) i ON s.an = i.an AND s.grupa = i.grupa;
+
+
+
+#14 Afișați studenții care au în an cu ei măcar un 
+coleg născut în aceeași zi a săptămânii.
+SELECT nr_matricol, nume, prenume, TO_CHAR(data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english')
+FROM studenti s1
+WHERE EXISTS (
+SELECT nr_matricol 
+FROM studenti s2
+WHERE TO_CHAR(s1.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english') = TO_CHAR(s2.data_nastere, 'Day', 'NLS_DATE_LANGUAGE=english')
+AND s1.an = s2.an AND s1.nr_matricol <> s2.nr_matricol
+)
+
+
+
+
+===================================================================================
+WEEK 10: exercitii
+===================================================================================
+#1
+SELECT s.nume, s.prenume, s.an, s.data_nastere
+FROM studenti s 
+WHERE EXISTS (
+SELECT coleg.nr_matricol
+FROM studenti coleg 
+WHERE s.an = coleg.an AND s.data_nastere < coleg.data_nastere AND s.nr_matricol <> coleg.nr_matricol
+)
+
+
+#2
+-- media stud pe an
+SELECT AVG(valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE s.an = X;
+-- OR -> GROUP BY s.an
+-- WHERE s.an = 2;
+-- WHERE s.an = 1
+-- WHERE s.an = 3;
+
+SELECT s.nume, s.prenume, s.an, AVG(n.valoare)
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.an, s.nr_matricol
+HAVING AVG(n.valoare) >= (
+SELECT AVG(n2.valoare)
+FROM studenti s2
+JOIN note n2 ON s2.nr_matricol = n2.nr_matricol
+WHERE s.an = s2.an
+)
+ORDER BY 3 ASC, 4 DESC;
+
+
+#3
+-- medii pentru fiecare studenti
+SELECT AVG(valoare)
+FROM note 
+GROUP BY nr_matricol;
+
+-- medii pe an
+SELECT an, AVG(valoare)
+FROM studenti s
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY an;
+
+-- cea mai mare medie dintr-un anume an
+SELECT MAX(AVG(valoare))
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+WHERE s.an = "X"
+GROUP BY s.nr_matricol;
+
+SELECT s.nume, s.prenume, s.an, s.grupa, AVG(n.valoare) as medie
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+GROUP BY s.nume, s.prenume, s.an, s.grupa 
+HAVING AVG(n.valoare) = (
+SELECT MAX(AVG(valoare))
+FROM studenti i
+JOIN note n ON i.nr_matricol = n.nr_matricol
+WHERE s.an = i.an AND s.grupa = i.grupa
+GROUP BY i.nr_matricol
+)
+ORDER BY s.an ASC, s.grupa ASC, medie DESC;
+
+
+#4
+SELECT s.nume, s.prenume, c.titlu_curs, n.valoare
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE EXISTS (
+SELECT s2.nume, s2.prenume, c2.titlu_curs, n2.valoare
+FROM studenti s2
+JOIN note n2 ON S2.nr_matricol = n2.nr_matricol
+JOIN cursuri c2 ON c2.id_curs = n2.id_curs
+WHERE c.titlu_curs = c2.titlu_curs AND n.valoare = n2.valoare 
+AND s.nr_matricol <> s2.nr_matricol
+)
+GROUP BY s.nume, s.prenume, c.titlu_curs, n.valoare;
+
+-- OR --
+
+SELECT s.nume, s.prenume, c.titlu_curs, n.valoare
+FROM studenti s 
+JOIN note n ON s.nr_matricol = n.nr_matricol
+JOIN cursuri c ON c.id_curs = n.id_curs
+WHERE (n.valoare, c.titlu_curs) IN (
+SELECT n2.valoare, c2.titlu_curs
+FROM studenti s2
+JOIN note n2 ON S2.nr_matricol = n2.nr_matricol
+JOIN cursuri c2 ON c2.id_curs = n2.id_curs
+WHERE c.titlu_curs = c2.titlu_curs AND n.valoare = n2.valoare 
+AND s.nr_matricol <> s2.nr_matricol
+)
+GROUP BY s.nume, s.prenume, c.titlu_curs, n.valoare;
+
+
+#5
+-- studenti care au colegi de grupa
+SELECT DISTINCT s.nr_matricol 
+FROM studenti s
+JOIN studenti s2 ON s.grupa = s2.grupa AND s.an = s2.an
+WHERE s.nr_matricol <> s2.nr_matricol;
+
+-- studenti care nu au colegi
+SELECT s.nr_matricol, s.nume, s.prenume, s.an, s.grupa
+FROM studenti s 
+WHERE s.nr_matricol NOT IN (
+SELECT DISTINCT s2.nr_matricol 
+FROM studenti s2
+JOIN studenti s3 ON s3.grupa = s2.grupa AND s3.an = s2.an
+WHERE s3.nr_matricol <> s2.nr_matricol
+);
+
+#6
+-- media notelor puse de profesori pt fiecare profesor
+SELECT d.id_prof, AVG(n.valoare)
+FROM didactic d 
+JOIN note n ON d.id_curs = n.id_curs 
+GROUP BY d.id_prof
+
+-- profesori care au macar un coleg ce are media notelor puse la fel ca el
+SELECT p.nume, p.prenume, AVG(n.valoare)
+FROM profesori p 
+JOIN didactic d ON p.id_prof = d.id_prof
+JOIN note n ON d.id_curs = n.id_curs
+GROUP BY p.nume, p.prenume, p.id_prof
+HAVING AVG(n.valoare) IN (
+SELECT AVG(n2.valoare)
+FROM profesori p2 
+JOIN didactic d2 ON p2.id_prof = d2.id_prof
+JOIN note n2 ON d2.id_curs = n2.id_curs
+WHERE p.id_prof <> p2.id_prof
+GROUP BY p2.nume, p2.prenume, p2.id_prof
+HAVING AVG(n.valoare) = AVG(n2.valoare)
+)
+ORDER BY AVG(n.valoare);
+
+
+
+SELECT * FROM studenti s1 WHERE s1.grupa IN (SELECT grupa FROM studenti s JOIN note n ON n.nr_matricol=s.nr_matricol WHERE n.valoare<5 AND s.grupa=s1.grupa GROUP BY s.nume,s.nr_matricol,s.prenume,s.an,s.grupa) AND
+s1.an IN (SELECT an FROM studenti s JOIN note n ON n.nr_matricol=s.nr_matricol WHERE n.valoare<5 AND s.an=s1.an GROUP BY s.nume,s.nr_matricol,s.prenume,s.an,s.grupa);
+
+
+#8
+-- corelat 
+SELECT c.titlu_curs, c.credite 
+FROM cursuri c
+WHERE c.credite = (
+SELECT MAX(c2.credite)
+FROM cursuri c2
+GROUP BY c2.an 
+HAVING c.an = c2.an
+)
+
+-- necorelat
+SELECT titlu_curs, credite
+FROM cursuri 
+WHERE (an, credite) IN (
+SELECT an, MAX(credite)
+FROM cursuri 
+GROUP BY an
+)
+
+===================================================================================
+Constrangeri
+===================================================================================
+#1 constrangeri - cheie primara - pentru studenti, profesori, cursuri
+
+ALTER TABLE studenti ADD CONSTRAINT 
+     pk_studs PRIMARY KEY (nr_matricol);
+	 
+ ALTER TABLE studenti DROP CONSTRAINT pk_studs;
+	 
+	 
+delete from profesori where id_prof = 'p20' or id_prof = 'p21';
+ALTER TABLE profesori ADD CONSTRAINT 
+     pk_profs PRIMARY KEY (id_prof);
+	 
+ ALTER TABLE profesori DROP CONSTRAINT pk_profs
+	 
+ALTER TABLE cursuri ADD CONSTRAINT 
+     pk_curs PRIMARY KEY (id_curs);
+	 
+ ALTER TABLE cursuri DROP CONSTRAINT pk_curs
+	 
+#2 Adăugați constrângerile referențiale pentru tabelele Note și Didactic. 
+-> La ștergerea unui profesor din tabela Profesori, 
+în tabela Didactic id-ul profesorului șters va deveni null. 
+-> La stergerea unui curs din tabela Cursuri, 
+in tabela Didactic va fi stearsă înregistrarea care referențiază cursul șters. 
+ALTER TABLE didactic ADD CONSTRAINT 
+     fk_did1 FOREIGN KEY (id_prof) 
+           REFERENCES profesori(id_prof) ON DELETE SET NULL;
+		   
+ALTER TABLE didactic DROP CONSTRAINT fk_did1;
+		   
+#3 constrangere ca un student sa nu aiba mai mult de o nota la un curs
+ALTER TABLE note ADD CONSTRAINT
+	pk_note UNIQUE(nr_matricol, id_curs) -- chei candidat
+	
+try: insert into note values('117', '21', 2, '18-02-2015');
+
+ALTER TABLE note DROP CONSTRAINT pk_note;
+
+	
+#4 constrangere ca valoarea notei sa fie cuprinsa inte 1 - 10
+ALTER TABLE note ADD CONSTRAINT
+	pk_note_between CHECK(valoare BETWEEN 1 AND 10);
+	
+try: insert into note values('130', '21', 0, '18-02-2015');
+
+ALTER TABLE note DROP CONSTRAINT pk_note_between;
