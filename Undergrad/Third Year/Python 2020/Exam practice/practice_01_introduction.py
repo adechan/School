@@ -43,6 +43,7 @@ print(s.split("||"))  # --> ["AB", "CD", "EF", "GH"]
 print(s.split("||")[0])  # --> "AB"
 print(s.split("||", 1))  # --> ["AB", "CD||EF||GH"]
 print(s.split("||", 2))  # --> ["AB", "CD", "EF||GH"]
+print(s.rsplit("||", 1))  # --> ["AB||CD||EF", "GH"]
 
 print(chr(71))  # --> converts a number to a character
 print(ord('a'))  # --> converts a character to number
