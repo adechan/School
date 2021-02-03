@@ -23,8 +23,8 @@ import re
 # starts the matching from the beginning of the string
 # stops once the matching ends
 def ex1():
-    r = re.compile("[a-z]*")
-    if r.match("123aaz123"):  # --> "123aaz"
+    r = re.compile("[0-9a-z]+")
+    if r.match("123aazAZ"):  # --> "123aaz"
         print("Match")
 ex1()
 

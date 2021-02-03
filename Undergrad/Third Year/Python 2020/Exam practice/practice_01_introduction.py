@@ -37,6 +37,11 @@ print(s[3:5])  # --> ho
 print(s[2:-4])  # --> thon
 print(s[::-1])  # --> maxEnohtyP
 print(s[1:7:2])  # --> yhn
+print(s[::-2])  # --> mxnhy
+print("=======")
+s = [1, 2, 3]
+print(max(s, key=lambda x: x % 2))
+print("=======")
 
 s = "AB||CD||EF||GH"
 print(s.split("||"))  # --> ["AB", "CD", "EF", "GH"]
@@ -62,5 +67,6 @@ print(ord('a'))  # --> converts a character to number
 # range(3) -> [0, 3)
 
 # def name(x = 2, y, z = 3) --> ERROR: y must have default value as well
+
 
 

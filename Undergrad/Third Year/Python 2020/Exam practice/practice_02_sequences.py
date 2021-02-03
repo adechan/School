@@ -39,7 +39,7 @@ x = [1, 2, 3]
 y = x  # --> [1, 2, 3]
 y.append(10)  # --> y = [1, 2, 3, 10], x = [1, 2, 3, 10]
 
-# use list(x), x.copy(), x[:]W
+# use list(x), x.copy(), x[:]
 x = [1, 2, 3]
 y = list(x)
 y.append(10)  # --> y = [1, 2, 3, 10], x = [1, 2, 3]
