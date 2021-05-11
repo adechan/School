@@ -1,0 +1,25 @@
+p 125.0 165.0 S1r 1 n
+p 140.0 325.0 S1v 0 n
+t 30.0 240.0 S1vr 0 w n
+t 240.0 230.0 S1rv 0 w n
+p 475.0 160.0 S2r 1 n
+p 475.0 310.0 S2v 0 n
+t 375.0 235.0 S2rv 0 w n
+t 600.0 230.0 S2vr 0 w n
+p 310.0 115.0 {Done S2} 1 n
+p 315.0 345.0 {Done S1} 0 n
+e {Done S1} S2rv 1 n
+e S1vr 0.7355710308 176.7257763 {Done S1} 0.6015917527 115.8015544 1 n
+e S2vr 0.2148540097 100.4390362 {Done S2} 0.0834885909 205.6526197 1 n
+e {Done S2} S1rv 1 n
+e S2vr S2r 1 n
+e S2v S2vr 1 n
+e S2rv S2v 1 n
+e S2r S2rv 1 n
+e S1vr S1r 1 n
+e S1v S1vr 1 n
+e S1rv S1v 1 n
+e S1r S1rv 1 n
+h lab1_ex1
+
+

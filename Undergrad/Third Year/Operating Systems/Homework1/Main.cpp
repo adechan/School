@@ -3,6 +3,7 @@
 // make a key at the current level 
 // then for each file make a value 
 // then call same function that we are in except one of the folders inside our directory
+// just a test
 
 
 // DWORD : integer (unsigned)
@@ -18,6 +19,13 @@
 #include <string>
 #include <vector>
 #include <array>
+
+
+int myFunction(int x) {
+  return 5 + x;
+}
+
+
 
 HANDLE open_file(std::string file_name) 
 {

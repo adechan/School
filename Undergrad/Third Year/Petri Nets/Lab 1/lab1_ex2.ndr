@@ -1,0 +1,34 @@
+p 30.0 220.0 Idle 1 n
+t 215.0 365.0 {Select E2} 0 w n
+p 365.0 225.0 Ready 0 n
+t 575.0 225.0 {Produce C} 0 w n
+p 765.0 230.0 C 0 n
+t 915.0 235.0 {Realizeaza E1} 0 w n
+p 565.0 130.0 Contor 0 n
+t 185.0 220.0 {Select E1} 0 w n
+t 915.0 370.0 {Realizeaza E2} 0 w n
+p 300.0 65.0 E1 0 n
+p 320.0 445.0 E2 0 n
+e E2 0.9646843551 168.1219795 {Realizeaza E2} 0.5482672642 154.029218 1 n
+e E1 0.02733647711 298.3906835 {Realizeaza E1} 0.3418868374 130.0845879 1 n
+e {Select E2} E2 1 n
+e {Select E1} E1 1 n
+e {Select E2} Contor 2 n
+e {Realizeaza E2} 0.5708839856 269.267525 Idle 0.8138869491 302.0066224 1 n
+e Ready 0.8301546145 167.8392088 {Realizeaza E2} 0.5221576911 158.533908 1 n
+e C {Realizeaza E2} 2 n
+e Contor {Produce C} 1 n
+e {Select E1} 0.1352906317 98.49365454 Contor 0.4822251205 107.6707946 3 n
+e {Realizeaza E1} 0.4098022436 247.7296914 Idle 0.09690568847 265.7592896 1 n
+e Ready 0.922305991 164.176734 {Realizeaza E1} 0.559540567 145.0310312 1 n
+e C {Realizeaza E1} 3 n
+e {Produce C} 0.3401977564 65.19202405 Ready 0.1400105315 105.1189802 1 n
+e {Produce C} C 1 n
+e Ready 0.9978780598 75.00666637 {Produce C} 0.5 52.5 1 n
+e {Select E2} Ready 1 n
+e {Select E1} Ready 1 n
+e Idle {Select E2} 1 n
+e Idle {Select E1} 1 n
+h lab1_ex2
+
+
